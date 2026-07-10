@@ -128,7 +128,6 @@
     align-items: center;
     flex: 1;
     /* Reserva espaço para o menu não bater no escudo central */
-    max-width: calc(50% - 90px); 
 }
 
 .header__center {
