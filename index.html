@@ -19,8 +19,7 @@
   <body>
     <header class="header">
       <div class="container header__inner">
-        <!-- Lado esquerdo: 5 itens -->
-        <div class="header__left">
+        <div class="header__left" id="menuLeft">
           <nav class="nav nav-left">
             <ul class="nav__list">
               <li class="nav__item nav__item--has-dropdown">
@@ -79,17 +78,15 @@
           </nav>
         </div>
 
-        <!-- Centro: logotipo (apenas imagem) -->
         <div class="header__center">
           <div class="logo">
-            <a href="#" id="logo-link">
+            <a href="#" id="logo-link" data-section="home">
               <img src="jose-justi.png" alt="José Justi FC" class="logo__img" />
             </a>
           </div>
         </div>
 
-        <!-- Lado direito: 5 itens -->
-        <div class="header__right">
+        <div class="header__right" id="menuRight">
           <nav class="nav nav-right">
             <ul class="nav__list">
               <li class="nav__item">
@@ -119,17 +116,14 @@
               </li>
             </ul>
           </nav>
-          <!-- Busca à direita -->
           <div class="header__search">
             <input type="text" id="searchInput" placeholder="Buscar..." />
-
             <button id="searchBtn">
               <i class="fas fa-search"></i>
             </button>
           </div>
         </div>
 
-        <!-- Hambúrguer (mobile) -->
         <button class="hamburger" id="hamburger" aria-label="Menu">
           <span class="hamburger__bar"></span>
           <span class="hamburger__bar"></span>
