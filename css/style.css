@@ -98,20 +98,22 @@
 }
 
 /* ============================================================
-   COLUNAS
+   COLUNAS (Proteção Central contra Sobreposição)
 ============================================================ */
 .header__left {
     display: flex;
-    justify-content: flex-start; /* Alinha o menu grudado na ponta esquerda */
+    justify-content: flex-start; /* Mantém grudado na ponta esquerda */
     align-items: center;
-    flex: 1;                     /* Ocupa espaço igual ao lado direito */
+    flex: 1;
+    /* Afasta o menu da esquerda do escudo central */
+    padding-right: 70px;         
 }
 
 .header__center {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Garante o logo cravado no centro do monitor */
+    transform: translate(-50%, -50%); /* Cravado no centro matemático */
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -120,11 +122,14 @@
 
 .header__right {
     display: flex;
-    justify-content: flex-end;  /* Alinha os itens grudados na ponta direita */
+    justify-content: flex-end;   /* Mantém grudado na ponta direita */
     align-items: center;
-    flex: 1;                     /* Ocupa espaço igual ao lado esquerdo */
+    flex: 1;
     gap: 20px;
+    /* Afasta o menu da direita do escudo central */
+    padding-left: 70px;          
 }
+
 /* ============================================================
    LOGO
 ============================================================ */
