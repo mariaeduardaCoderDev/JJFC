@@ -100,19 +100,18 @@
 /* ============================================================
    COLUNAS
 ============================================================ */
-
 .header__left {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start; /* Alinha o menu da esquerda na ponta extrema */
     align-items: center;
-    width: 42%; /* Reserva espaço fixo na esquerda */
+    flex-basis: 45%;             /* Garante metade do espaço livre para o lado esquerdo */
 }
 
 .header__center {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Força o alinhamento no centro exato da tela */
+    transform: translate(-50%, -50%); /* Fixa o logo no centro matemático exato */
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -121,12 +120,11 @@
 
 .header__right {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;   /* Alinha a barra de busca e o menu na ponta extrema direita */
     align-items: center;
-    width: 46%; /* Reserva espaço maior e fixo para a direita (links + busca) */
-    gap: 20px;
+    flex-basis: 45%;             /* Garante metade do espaço livre para o lado direito */
+    gap: 25px;                   /* Distância confortável entre os links e a busca */
 }
-
 /* ============================================================
    LOGO
 ============================================================ */
