@@ -1,13 +1,13 @@
-    /* ============================================================
-    RESET & BASE
-    ============================================================ */
-    * {
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    }
+}
 
-    body {
+body {
     background-color: #000000;
     color: #f0f0f0;
     font-family: "Roboto", sans-serif;
@@ -15,159 +15,102 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    }
+}
 
-    a {
+a {
     text-decoration: none;
     color: inherit;
-    transition:
-        color 0.3s,
-        background-color 0.3s;
-    }
+    transition: color 0.3s, background-color 0.3s;
+}
 
-    ul {
+ul {
     list-style: none;
-    }
+}
 
-    .container {
-    max-width: 1300px;
+.container {
+    max-width: 1440px; /* Expandido para dar mais espaço e evitar quebras de texto */
     margin: 0 auto;
     padding: 0 20px;
-    }
+}
 
-    /* ============================================================
-    TIPOGRAFIA
-    ============================================================ */
-    h1,
-    h2,
-    h3,
-    h4 {
+/* ============================================================
+   TIPOGRAFIA
+   ============================================================ */
+h1, h2, h3, h4 {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
-    }
+}
 
-    h1 {
+h1 {
     font-size: 2.8rem;
     color: #d4af37;
     margin-bottom: 1rem;
-    }
+}
 
-    h2 {
+h2 {
     font-size: 2.2rem;
     color: #d4af37;
     border-bottom: 2px solid #d4af37;
     display: inline-block;
     padding-bottom: 0.3rem;
     margin-bottom: 1.5rem;
-    }
+}
 
-    h3 {
+h3 {
     font-size: 1.5rem;
     color: #d4af37;
     margin: 1.2rem 0 0.5rem;
-    }
+}
 
-    p {
+p {
     margin-bottom: 1rem;
     color: #e0e0e0;
-    }
+}
 
 /* ============================================================
-   HEADER (Garante o espaço correto e o contexto de posicionamento)
-============================================================ */
+   HEADER & CONTAINER (Grid de Alinhamento Matemático Central)
+   ============================================================ */
 .header {
     background: #0a0a0a;
     border-bottom: 2px solid #d4af37;
     position: sticky;
     top: 0;
     z-index: 1000;
-    min-height: 130px;
+    height: 130px; /* Fixado para estabilizar o alinhamento vertical */
     display: flex;
     align-items: center;
 }
 
 .header__inner {
-    display: flex;
-    justify-content: space-between; /* Empurra o Menu 1 para a extrema esquerda e o Menu 2 para a extrema direita */
+    display: grid !important;
+    /* Divide o cabeçalho em 3 áreas: Esquerda livre, Centro fixo em 180px, Direita livre */
+    grid-template-columns: 1fr 180px 1fr;
     align-items: center;
     width: 100%;
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative; /* ESSENCIAL: Serve de ponto de referência para o centro absoluto */
 }
+
 /* ============================================================
-   COLUNAS (Distâncias simétricas e proteção contra quebras)
+   COLUNAS DO HEADER
    ============================================================ */
 .header__left {
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    /* Adiciona uma margem interna para o texto não encostar no escudo se a tela encolher */
-    padding-right: 80px; 
 }
 
 .header__center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none; /* Garante que a área invisível do bloco não bloqueie cliques nos links */
-}
-
-.header__center * {
-    pointer-events: auto; /* Devolve os cliques apenas para o logo em si */
 }
 
 .header__right {
     display: flex;
     justify-content: flex-end;   
     align-items: center;
-    gap: 15px;
-    /* Adiciona a mesma margem interna idêntica ao lado esquerdo para manter a simetria visual */
-    padding-left: 80px; 
+    gap: 20px; /* Espaço seguro entre o fim do menu e a caixa de busca */
 }
 
-
-/* ============================================================
-   COLUNAS 
-   ============================================================ */
-.header__left {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    /* Adiciona uma margem interna para o texto não encostar no escudo se a tela encolher */
-    padding-right: 80px; 
-}
-
-.header__center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none; /* Garante que a área invisível do bloco não bloqueie cliques nos links */
-}
-
-.header__center * {
-    pointer-events: auto; /* Devolve os cliques apenas para o logo em si */
-}
-
-.header__right {
-    display: flex;
-    justify-content: flex-end;   
-    align-items: center;
-    gap: 15px;
-    /* Adiciona a mesma margem interna idêntica ao lado esquerdo para manter a simetria visual */
-    padding-left: 80px; 
-}
 /* ============================================================
    LOGO
    ============================================================ */
@@ -184,7 +127,7 @@
 }
 
 .logo__img {
-    height: 110px; /* Reduzido de 150px para não estourar a altura de 130px do cabeçalho */
+    height: 110px; /* Dimensão perfeita para não encostar na borda dourada */
     width: auto;
     border-radius: 50%;
     object-fit: contain;
@@ -195,9 +138,10 @@
 .logo__img:hover {
     transform: scale(1.05);
 }
+
 /* ============================================================
-   MENUS
-============================================================ */
+   MENUS DESKTOP
+   ============================================================ */
 .nav {
     display: flex;
 }
@@ -205,15 +149,7 @@
 .nav__list {
     display: flex;
     align-items: center;
-    gap: 12px;                   /* Reduzido o espaço entre os links de 20px para 12px */
-}
-
-.header__left .nav__list {
-    justify-content: flex-start; 
-}
-
-.header__right .nav__list {
-    justify-content: flex-start;
+    gap: 14px; /* Espaçamento ideal para telas padrão */
 }
 
 .nav__item {
@@ -223,7 +159,7 @@
 
 .nav__link {
     font-family: "Oswald", sans-serif;
-    font-size: 0.85rem;          /* Reduzido levemente de 0.95rem para 0.85rem para o texto caber perfeitamente */
+    font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     color: #ccc;
@@ -242,9 +178,8 @@
 }
 
 /* ============================================================
-   BUSCA
-============================================================ */
-
+   BARRA DE BUSCA
+   ============================================================ */
 .header__search {
     display: flex;
     align-items: center;
@@ -253,34 +188,38 @@
 }
 
 .header__search input {
-    width: 150px;
+    width: 160px;
     height: 38px;
     padding: 0 15px;
-    border-radius: 30px;
+    border-radius: 20px;
     border: 2px solid #d4af37;
-    background: transparent;
+    background: #111;
     color: #fff;
     outline: none;
 }
 
 .header__search button {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
     background: #d4af37;
     color: #000;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: .3s;
 }
 
 .header__search button:hover {
     transform: scale(1.08);
 }
-    /* ============================================================
-    DROPDOWN (SUB MENU)
-    ============================================================ */
-    .dropdown {
+
+/* ============================================================
+   DROPDOWN (SUB MENU)
+   ============================================================ */
+.dropdown {
     display: none;
     position: absolute;
     top: 100%;
@@ -294,16 +233,17 @@
     z-index: 999;
     flex-direction: column;
     gap: 10px;
-    }
+}
 
-    .nav__item--has-dropdown:hover .dropdown {
+.nav__item--has-dropdown:hover .dropdown {
     display: flex;
-    }
+}
 
-    .dropdown__group {
+.dropdown__group {
     margin-bottom: 4px;
-    }
-    .dropdown__title {
+}
+
+.dropdown__title {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
@@ -312,53 +252,32 @@
     border-bottom: 1px solid #333;
     padding-bottom: 4px;
     margin-bottom: 4px;
-    }
-    .dropdown__group ul {
+}
+
+.dropdown__group ul {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    }
-    .dropdown__group ul li a {
+}
+
+.dropdown__group ul li a {
     font-size: 0.9rem;
     color: #dddddd;
     padding: 4px 8px;
     border-radius: 4px;
     display: block;
-    transition:
-        background 0.3s,
-        color 0.3s;
-    }
-    .dropdown__group ul li a:hover {
+    transition: background 0.3s, color 0.3s;
+}
+
+.dropdown__group ul li a:hover {
     background: #d4af37;
     color: #000000;
-    }
+}
 
-    /* ============================================================
-    BUSCA (À DIREITA)
-    ============================================================ */
-    .header__search {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #aaaaaa;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: color 0.3s;
-    white-space: nowrap;
-    }
-    .header__search:hover {
-    color: #d4af37;
-    }
-    .search-label {
-    font-family: "Oswald", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    }
-
-    /* ============================================================
-    HAMBURGUER (MOBILE)
-    ============================================================ */
-    .hamburger {
+/* ============================================================
+   HAMBURGUER (MOBILE)
+   ============================================================ */
+.hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
@@ -367,45 +286,47 @@
     cursor: pointer;
     padding: 6px;
     z-index: 10;
-    }
-    .hamburger__bar {
+}
+
+.hamburger__bar {
     width: 28px;
     height: 3px;
     background: #d4af37;
     border-radius: 3px;
     transition: 0.3s;
-    }
+}
 
-    /* ============================================================
-    MAIN – ÁREA DE CONTEÚDO
-    ============================================================ */
-    .main {
+/* ============================================================
+   MAIN – ÁREA DE CONTEÚDO
+   ============================================================ */
+.main {
     flex: 1;
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-    }
+}
 
-    /* Página inicial (home) */
-    .page-home {
+.page-home {
     text-align: center;
     padding: 50px 20px;
-    }
-    .page-home h1 {
+}
+
+.page-home h1 {
     font-size: 3.5rem;
-    }
-    .page-home .lead {
+}
+
+.page-home .lead {
     font-size: 1.3rem;
     color: #cccccc;
     max-width: 700px;
     margin: 20px auto;
-    }
+}
 
-    /* ============================================================
-    BREADCRUMB E BOTÃO VOLTAR
-    ============================================================ */
-    .page-header {
+/* ============================================================
+   BREADCRUMB E BOTÃO VOLTAR
+   ============================================================ */
+.page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -414,25 +335,28 @@
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid #333;
-    }
+}
 
-    .breadcrumb {
+.breadcrumb {
     font-size: 0.85rem;
     color: #aaaaaa;
     font-family: "Roboto", sans-serif;
-    }
-    .breadcrumb a {
+}
+
+.breadcrumb a {
     color: #d4af37;
     transition: color 0.3s;
-    }
-    .breadcrumb a:hover {
-    color: #ffffff;
-    }
-    .breadcrumb span {
-    color: #888888;
-    }
+}
 
-    .btn-voltar {
+.breadcrumb a:hover {
+    color: #ffffff;
+}
+
+.breadcrumb span {
+    color: #888888;
+}
+
+.btn-voltar {
     background: transparent;
     border: 1px solid #d4af37;
     color: #d4af37;
@@ -443,134 +367,160 @@
     text-transform: uppercase;
     font-size: 0.85rem;
     cursor: pointer;
-    transition:
-        background 0.3s,
-        color 0.3s;
-    }
-    .btn-voltar:hover {
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-voltar:hover {
     background: #d4af37;
     color: #000000;
-    }
+}
 
-    /* ============================================================
-    CARDS
-    ============================================================ */
-    .card-grid {
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
     margin: 30px 0;
-    }
-    .card {
+}
+
+.card {
     background: #111111;
     border: 1px solid #333;
     border-radius: 8px;
     padding: 20px;
-    transition:
-        border-color 0.3s,
-        transform 0.2s;
-    }
-    .card:hover {
+    transition: border-color 0.3s, transform 0.2s;
+}
+
+.card:hover {
     border-color: #d4af37;
     transform: translateY(-4px);
-    }
-    .card h3 {
-    margin-top: 0;
-    }
-    .card p {
-    color: #bbbbbb;
-    }
+}
 
-    /* ============================================================
-    TABELA DE JOGOS
-    ============================================================ */
-    .table-games {
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    color: #bbbbbb;
+}
+
+/* ============================================================
+   TABELA DE JOGOS
+   ============================================================ */
+.table-games {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    }
-    .table-games th,
-    .table-games td {
+}
+
+.table-games th,
+.table-games td {
     padding: 12px 15px;
     border-bottom: 1px solid #333;
     text-align: left;
-    }
-    .table-games th {
+}
+
+.table-games th {
     background: #1a1a1a;
     color: #d4af37;
     font-family: "Oswald", sans-serif;
     text-transform: uppercase;
-    }
-    .table-games tr:hover td {
-    background: #0f0f0f;
-    }
+}
 
-    /* ============================================================
-    FOOTER
-    ============================================================ */
-    .footer {
+.table-games tr:hover td {
+    background: #0f0f0f;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
     background: #0a0a0a;
     border-top: 2px solid #d4af37;
     padding: 20px 0;
     margin-top: 30px;
-    }
-    .footer__inner {
+}
+
+.footer__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
-    }
-    .footer p {
+}
+
+.footer p {
     margin: 0;
     color: #888888;
     font-size: 0.9rem;
-    }
-    .footer__social {
+}
+
+.footer__social {
     display: flex;
     gap: 18px;
-    }
-    .footer__social a {
+}
+
+.footer__social a {
     color: #aaaaaa;
     font-size: 1.3rem;
     transition: color 0.3s;
-    }
-    .footer__social a:hover {
+}
+
+.footer__social a:hover {
     color: #d4af37;
+}
+
+/* ============================================================
+   RESPONSIVIDADE & AJUSTES DE TELA
+   ============================================================ */
+
+/* Ajuste Fino de Proteção: Evita quebra de palavras em telas médias (Notebooks comuns) */
+@media (min-width: 769px) and (max-width: 1366px) {
+    .nav__list {
+        gap: 8px; /* Diminui o espaço entre palavras para não esmagar contra o centro */
     }
+    .nav__link {
+        font-size: 0.78rem; /* Reduz levemente o texto do link */
+    }
+    .header__search input {
+        width: 130px; /* Diminui ligeiramente o input de busca */
+    }
+}
 
-    /* ============================================================
-    RESPONSIVIDADE
-    ============================================================ */
-
-    /* Telas médias (até 992px) – reduz espaçamentos */
-    @media (max-width: 992px) {
+/* Telas médias menores (até 992px) */
+@media (max-width: 992px) {
     .nav__list {
         gap: 0.5rem 1rem;
     }
     .nav__link {
         font-size: 0.8rem;
     }
-    .logo__img {
-        height: 45px;
-    }
-    }
+}
 
-    /* Tablets e celulares grandes (até 768px) – menu hambúrguer */
-    @media (max-width: 768px) {
+/* Tablets e celulares (até 768px) – Ativação total do menu mobile */
+@media (max-width: 768px) {
+    .header {
+        height: auto; /* Permite expansão vertical no mobile */
+    }
+    
     .header__inner {
-        flex-wrap: wrap; /* permite quebra para o mobile */
+        display: flex !important; /* Desativa a grid rígida no mobile */
+        flex-wrap: wrap;
         justify-content: center;
         min-height: 60px;
+        padding: 10px 20px;
     }
 
     .header__left,
     .header__right {
         flex: 1 1 100%;
         justify-content: center;
-        display: none; /* escondido por padrão */
+        display: none; /* Oculta os itens do menu por padrão no mobile */
         order: 2;
     }
+
     .header__left.open,
     .header__right.open {
         display: flex;
@@ -586,6 +536,7 @@
         order: 1;
         justify-content: center;
     }
+
     .header__right {
         order: 3;
     }
@@ -594,44 +545,42 @@
         display: flex;
         position: absolute;
         right: 20px;
-        top: 12px;
+        top: 15px;
     }
 
     .header__search {
-        display: none; /* opcional: esconde a busca no mobile */
+        display: none; /* Oculta a caixa de busca nativa no menu colapsado mobile */
     }
 
     .logo__img {
-        height: 40px;
+        height: 50px; /* Tamanho compacto reduzido automático para smartphones */
     }
 
-    /* Menu mobile: itens empilhados verticalmente */
     .nav__list {
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.3rem 0.8rem;
     }
+
     .nav__item {
         white-space: normal;
         width: auto;
         text-align: center;
-        border-bottom: none;
     }
+
     .nav__link {
         font-size: 0.85rem;
         padding: 8px 12px;
         border-bottom: none;
         justify-content: center;
-        width: auto;
     }
+
     .nav__link.active {
         border-bottom: none;
         background: rgba(212, 175, 55, 0.1);
     }
 
-    /* Dropdown em acordeão no mobile */
     .dropdown {
-        display: none;
         position: static;
         background: #0d0d0d;
         border: none;
@@ -640,15 +589,16 @@
         padding: 8px 0 8px 20px;
         width: 100%;
     }
+
     .nav__item--has-dropdown.open .dropdown {
         display: flex;
     }
 
-    /* Ajustes de conteúdo */
     .page-header {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .btn-voltar {
         align-self: flex-start;
     }
@@ -656,9 +606,11 @@
     .page-home h1 {
         font-size: 2.5rem;
     }
+
     h1 {
         font-size: 2.2rem;
     }
+
     h2 {
         font-size: 1.8rem;
     }
@@ -667,12 +619,12 @@
         flex-direction: column;
         text-align: center;
     }
-    }
+}
 
-    /* Celulares pequenos (até 480px) */
-    @media (max-width: 480px) {
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
     .logo__img {
-        height: 35px;
+        height: 45px;
     }
     .main {
         padding: 20px 12px;
@@ -684,41 +636,4 @@
     .nav__list {
         gap: 0.2rem 0.5rem;
     }
-    }
-.header__search{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.header__search input{
-
-    width:180px;
-
-    padding:8px 12px;
-
-    border-radius:20px;
-
-    border:2px solid #D4AF37;
-
-    background:#111;
-
-    color:white;
-
-}
-
-.header__search button{
-
-    width:40px;
-
-    height:40px;
-
-    border-radius:50%;
-
-    border:none;
-
-    background:#D4AF37;
-
-    cursor:pointer;
-
 }
