@@ -169,20 +169,7 @@
 .logo__img:hover {
     transform: scale(1.05);
 }
-/* ============================================================
-   PROTEÇÃO DE TEXTO (Ajuste fino nos menus para telas de notebooks)
-   ============================================================ */
-@media (min-width: 769px) and (max-width: 1300px) {
-    .nav__link {
-        font-size: 0.75rem; /* Encolhe ligeiramente a fonte em telas médias para evitar qualquer quebra */
-    }
-    .nav__list {
-        gap: 8px; /* Ajusta o respiro entre os links */
-    }
-    .header__search input {
-        width: 130px; /* Encolhe ligeiramente o input de busca caso a tela seja menor */
-    }
-}
+
 /* ============================================================
    MENUS
 ============================================================ */
