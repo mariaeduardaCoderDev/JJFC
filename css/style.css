@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 135px; /* Evita que o conteúdo suma sob o header fixo duplo */
+    padding-top: 145px; /* Altura exata para o conteúdo não sumir sob as duas barras fixas */
 }
 
 a {
@@ -70,7 +70,7 @@ p {
 }
 
 /* ============================================================
-   HEADER & NAVEGAÇÃO (Estrutura Consolidada)
+   HEADER PRINCIPAL (Estrutura Unificada de Barra Dupla)
    ============================================================ */
 .header {
     width: 100%;
@@ -80,7 +80,7 @@ p {
     z-index: 1000;
 }
 
-/* 1. Barra Superior (Fina) */
+/* 1. Barra Superior (Links de Apoio) */
 .header__top {
     background-color: #0d0d0d;
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
@@ -92,7 +92,7 @@ p {
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
-    gap: 24px;
+    gap: 25px;
     padding: 0 20px;
 }
 
@@ -108,12 +108,12 @@ p {
     color: #d4af37;
 }
 
-/* 2. Barra Principal */
+/* 2. Barra Principal (Grid Matemática Alinhada) */
 .header__main {
     background-color: #000000;
     border-bottom: 2px solid #d4af37;
-    padding: 10px 0;
-    height: 95px;
+    padding: 8px 0;
+    height: 100px;
     display: flex;
     align-items: center;
 }
@@ -122,26 +122,25 @@ p {
     max-width: 1440px;
     margin: 0 auto;
     display: grid;
+    /* Divide em 3 colunas perfeitas: Menu Esquerdo | Escudo Central (160px) | Menu Direito + Busca */
     grid-template-columns: 1fr 160px 1fr;
     align-items: center;
     width: 100%;
     padding: 0 20px;
-    position: relative;
 }
 
-/* Blocos de Navegação Laterais */
+/* Alinhamento dos Blocos Laterais */
 .header__left {
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    gap: 16px;
 }
 
 .header__right {
     display: flex;
     justify-content: flex-end;   
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .header__nav {
@@ -150,7 +149,7 @@ p {
     gap: 16px;
 }
 
-/* Links Globais do Menu Principal */
+/* Links da Barra Principal */
 .header__link {
     color: #ffffff;
     font-family: "Oswald", sans-serif;
@@ -177,7 +176,7 @@ p {
 }
 
 .header__logo {
-    height: 85px;
+    height: 85px; /* Tamanho exato para ficar contido dentro dos 100px da barra */
     width: auto;
     display: block;
     transition: transform 0.3s ease;
@@ -187,7 +186,7 @@ p {
     transform: scale(1.05);
 }
 
-/* 4. Barra de Busca */
+/* 4. Caixa de Busca */
 .header__search {
     display: flex;
     align-items: center;
@@ -308,6 +307,17 @@ p {
     background: #d4af37;
     border-radius: 3px;
     transition: 0.3s;
+}
+
+/* Animação do botão ao abrir (se você usar JS para adicionar a classe .open) */
+.hamburger.open .hamburger__bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.open .hamburger__bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open .hamburger__bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ============================================================
@@ -487,16 +497,19 @@ p {
 }
 
 /* ============================================================
-   RESPONSIVIDADE (Telas de Notebooks até Smartphones)
+   RESPONSIVIDADE AJUSTADA (Prevenção de Quebras)
    ============================================================ */
 
-/* Redução sutil em notebooks para preservar o espaço em linha */
+/* Notebooks e telas médias: encolhe os espaçamentos dinamicamente */
 @media (max-width: 1366px) {
     .header__main-container {
-        grid-template-columns: 1fr 140px 1fr;
+        grid-template-columns: 1fr 130px 1fr;
     }
-    .header__left, .header__right {
+    .header__right {
         gap: 12px;
+    }
+    .header__nav {
+        gap: 10px;
     }
     .header__link {
         font-size: 12px;
@@ -506,14 +519,14 @@ p {
     }
 }
 
-/* Gatilho Mobile unificado em 1024px */
+/* Ativação do Menu Mobile em 1024px para evitar que os links batam no escudo */
 @media (max-width: 1024px) {
     body {
-        padding-top: 80px; /* Ajuste do espaçamento do corpo no mobile */
+        padding-top: 80px; 
     }
 
     .header__top {
-        display: none; /* Simplifica o menu mobile ocultando a barra superior */
+        display: none; /* Esconde a barra menor no mobile para simplificar o layout */
     }
 
     .header__main {
@@ -533,7 +546,7 @@ p {
         height: 60px;
     }
 
-    /* Gavetas laterais Mobile dinâmicas */
+    /* Transforma as colunas em "gavetas" expansíveis verticais */
     .header__left,
     .header__right {
         position: fixed;
@@ -559,7 +572,7 @@ p {
         border-bottom: 2px solid #d4af37;
     }
 
-    /* Classes acionadas pelo JavaScript */
+    /* Classes acionadas quando o menu mobile está aberto */
     .header__left.open,
     .header__right.open {
         left: 0;
@@ -585,7 +598,7 @@ p {
 
     .header__search {
         margin-top: 10px;
-        width: 80%;
+        width: 90%;
         justify-content: space-between;
     }
 
@@ -606,6 +619,7 @@ p {
     }
 }
 
+/* Ajustes finos para smartphones */
 @media (max-width: 480px) {
     .header__logo {
         height: 50px;
