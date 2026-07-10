@@ -102,18 +102,17 @@
 ============================================================ */
 .header__left {
     display: flex;
-    justify-content: flex-start; /* Mantém grudado na ponta esquerda */
+    justify-content: flex-start; 
     align-items: center;
     flex: 1;
-    /* Afasta o menu da esquerda do escudo central */
-    padding-right: 70px;         
+    padding-right: 90px;         /* Aumentado para empurrar o texto 'CONTATO' bem longe do logo */
 }
 
 .header__center {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Cravado no centro matemático */
+    transform: translate(-50%, -50%); 
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -122,14 +121,12 @@
 
 .header__right {
     display: flex;
-    justify-content: flex-end;   /* Mantém grudado na ponta direita */
+    justify-content: flex-end;   
     align-items: center;
     flex: 1;
-    gap: 20px;
-    /* Afasta o menu da direita do escudo central */
-    padding-left: 70px;          
+    gap: 15px;
+    padding-left: 90px;          /* Aumentado para empurrar o texto 'TRANSPARÊNCIA' longe do logo */
 }
-
 /* ============================================================
    LOGO
 ============================================================ */
@@ -162,7 +159,6 @@
 /* ============================================================
    MENUS
 ============================================================ */
-
 .nav {
     display: flex;
 }
@@ -170,16 +166,11 @@
 .nav__list {
     display: flex;
     align-items: center;
-    gap: 20px;                   /* Espaçamento uniforme entre os links */
+    gap: 12px;                   /* Reduzido o espaço entre os links de 20px para 12px */
 }
 
-/* Removemos o 'flex-end' antigo que estava jogando o menu esquerdo para o centro */
 .header__left .nav__list {
     justify-content: flex-start; 
-}
-
-.header__right .nav__list {
-    justify-content: flex-start;
 }
 
 .header__right .nav__list {
@@ -193,7 +184,7 @@
 
 .nav__link {
     font-family: "Oswald", sans-serif;
-    font-size: .95rem;
+    font-size: 0.85rem;          /* Reduzido levemente de 0.95rem para 0.85rem para o texto caber perfeitamente */
     font-weight: 600;
     text-transform: uppercase;
     color: #ccc;
@@ -202,7 +193,7 @@
     transition: .3s;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
 .nav__link:hover,
