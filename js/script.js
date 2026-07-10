@@ -71,7 +71,7 @@
             <div class="card-grid">
                 <div class="card"><h3>Nome</h3><p>José Justi FC – homenagem ao bairro onde tudo começou.</p></div>
                 <div class="card"><h3>Cores</h3><p>Preto e Dourado – representam a elegância, a força e a riqueza da nossa história.</p></div>
-                <div class="card"><h3>Escudo</h3><p>O escudo traz as iniciais JJF entrelaçadas, uma bola de futebol e uma estrela dourada que simboliza os primeiros títulos conquistados.</p></div>
+                <div class="card"><h3>Escudo</h3><p>O escudo traz as do clube e um leão que simboliza a força e o coragem dos jogadores.</p></div>
                 <div class="card"><h3>Valores</h3><p>Raça, superação, fair play, trabalho em equipe e amor à camisa.</p></div>
             </div>
         `,
@@ -85,7 +85,7 @@
     contatos: `
             <h2>Contatos</h2>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato (19) 99014-1082 e (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato (19) 99014-1082 (Valdir Junior)e (19) 99608-3109 (Maria Eduarda)</p>
             <p><i class="fas fa-map-marker-alt" style="color:#D4AF37; width:30px;"></i> <strong>Sede:</strong> Sem definição! Mococa – SP</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h</p>
         `,
@@ -93,7 +93,7 @@
             <h2>Ouvidoria</h2>
             <p>Canal exclusivo para reclamações, sugestões e elogios. Sua opinião é fundamental para melhorarmos cada dia mais.</p>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> (19) 99014-1082 e (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> (19) 99014-1082 (Valdir Junior)e (19) 99608-3109 (Maria Eduarda)</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Atendimento:</strong> Segunda a sexta, 10h às 17h</p>
         `,
     noticias: `
@@ -120,8 +120,8 @@
             <h2>Contato</h2>
             <p>Entre em contato conosco através dos nossos canais:</p>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082 (Valdir Junior)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109 (Maria Eduarda)</p>
         `,
     futebol: `
             <h2>Futebol</h2>
@@ -150,10 +150,10 @@
             <h2>Transparência</h2>
             <p>O José Justi FC segue rigorosamente as normas de governança e transparência. Disponibilizamos para consulta:</p>
             <ul style="list-style: disc; padding-left: 20px; color: #e0e0e0;">
-                <li>Demonstrações financeiras anuais (Indefinido)</li>
-                <li>Relatórios de gestão (Indefinido)</li>
-                <li>Prestação de contas (Indefinido)</li>
-                <li>Plano de carreira e desenvolvimento de atletas (Indefinido)</li>
+                <li>Demonstrações financeiras anuais (Não Iniciado)</li>
+                <li>Relatórios de gestão (Não Iniciado)</li>
+                <li>Prestação de contas (Não Iniciado)</li>
+                <li>Plano de carreira e desenvolvimento de atletas (Não Iniciado)</li>
             </ul>
         `,
     negocios: `
@@ -165,8 +165,8 @@
             <h2>Imprensa</h2>
             <p>Assessoria de imprensa do José Justi FC:</p>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082 (Valdir Junior)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109 (Maria Eduarda)</p>
             <p>Disponibilizamos releases, interviews e materiais para veículos de comunicação.</p>
         `,
   };
