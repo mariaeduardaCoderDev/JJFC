@@ -15,6 +15,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 135px; /* Evita que o conteúdo suma sob o header fixo duplo */
 }
 
 a {
@@ -69,31 +70,29 @@ p {
 }
 
 /* ============================================================
-   HEADER & INNER (Layout Simétrico Centralizado)
+   HEADER & NAVEGAÇÃO (Estrutura Consolidada)
    ============================================================ */
-/* Configurações Gerais do Header */
 .header {
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    font-family: Arial, sans-serif;
 }
 
 /* 1. Barra Superior (Fina) */
 .header__top {
     background-color: #0d0d0d;
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 6px 0;
+    padding: 8px 0;
 }
 
 .header__top-container {
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
-    gap: 20px;
+    gap: 24px;
     padding: 0 20px;
 }
 
@@ -101,13 +100,12 @@ p {
     font-size: 11px;
     text-transform: uppercase;
     color: #b3b3b3;
-    text-decoration: none;
     letter-spacing: 1px;
-    transition: color 0.3s;
+    font-weight: 600;
 }
 
 .header__top .header__link:hover {
-    color: #d4af37; /* Dourado */
+    color: #d4af37;
 }
 
 /* 2. Barra Principal */
@@ -115,64 +113,74 @@ p {
     background-color: #000000;
     border-bottom: 2px solid #d4af37;
     padding: 10px 0;
+    height: 95px;
+    display: flex;
+    align-items: center;
 }
 
 .header__main-container {
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0 auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 160px 1fr;
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
     padding: 0 20px;
     position: relative;
 }
 
-/* Alinhamento dos Menus (Esquerda e Direita) */
-.header__nav {
+/* Blocos de Navegação Laterais */
+.header__left {
     display: flex;
+    justify-content: flex-start; 
     align-items: center;
-    gap: 18px;
-    flex: 1;
+    gap: 16px;
 }
 
 .header__right {
     display: flex;
+    justify-content: flex-end;   
     align-items: center;
     gap: 20px;
-    justify-content: flex-end;
-    flex: 1;
 }
 
-/* Links do Menu Principal */
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Links Globais do Menu Principal */
 .header__link {
     color: #ffffff;
-    text-decoration: none;
+    font-family: "Oswald", sans-serif;
     text-transform: uppercase;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 600;
     letter-spacing: 0.5px;
     white-space: nowrap;
-    transition: color 0.3s;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
 }
 
-.header__link:hover {
+.header__link:hover,
+.header__link.active {
     color: #d4af37;
+    border-bottom-color: #d4af37;
 }
 
 /* 3. Escudo Centralizado */
 .header__logo-container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header__logo {
-    height: 75px; /* Ajuste o tamanho ideal do leão aqui */
+    height: 85px;
     width: auto;
     display: block;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .header__logo:hover {
@@ -183,17 +191,17 @@ p {
 .header__search {
     display: flex;
     align-items: center;
-    background: #141414;
-    border: 1px solid #d4af37;
+    background: #111111;
+    border: 2px solid #d4af37;
     border-radius: 20px;
-    padding: 4px 10px;
+    padding: 2px 6px 2px 14px;
+    height: 38px;
 }
 
 .search__input {
     background: none;
     border: none;
     color: #fff;
-    padding: 4px 8px;
     font-size: 12px;
     outline: none;
     width: 110px;
@@ -201,172 +209,34 @@ p {
 }
 
 .search__input:focus {
-    width: 150px;
+    width: 140px;
 }
 
 .search__btn {
-    background: none;
+    background: #d4af37;
     border: none;
-    color: #d4af37;
+    color: #000;
     cursor: pointer;
-    font-size: 12px;
-}
-
-/* Espaçador para o conteúdo não sumir sob o header fixo */
-body {
-    padding-top: 115px; /* Altura combinada das duas barras */
-}
-
-/* ============================================================
-   COLUNAS DO HEADER
-   ============================================================ */
-.header__left {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    flex: 1;
-    max-width: calc(50% - 100px); /* Garante que não bate no logo central */
-}
-
-.header__center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 105;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-}
-
-.header__right {
-    display: flex;
-    justify-content: flex-end;   
-    align-items: center;
-    gap: 20px;
-    flex: 1;
-    max-width: calc(50% - 100px);
-}
-
-/* ============================================================
-   LOGO
-   ============================================================ */
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo__img {
-    height: 110px;
-    width: auto;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    object-fit: contain;
-    display: block;
-    transition: transform .3s ease;
-}
-
-.logo__img:hover {
-    transform: scale(1.05);
-}
-
-/* ============================================================
-   MENUS DESKTOP
-   ============================================================ */
-.nav {
-    display: flex;
-}
-
-.nav__list {
     display: flex;
     align-items: center;
-    gap: 14px;
-}
-
-.nav__item {
-    position: relative;
-    white-space: nowrap;
-}
-
-.nav__link {
-    font-family: "Oswald", sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #ccc;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
-    transition: .3s;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.nav__link:hover,
-.nav__link.active {
-    color: #d4af37;
-    border-bottom-color: #d4af37;
-}
-
-.nav__arrow {
-    font-size: 0.7rem;
+    justify-content: center;
     transition: transform 0.3s;
 }
 
-/* ============================================================
-   BARRA DE BUSCA
-   ============================================================ */
-.header__search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
-.header__search input {
-    width: 140px;
-    height: 38px;
-    padding: 0 15px;
-    border-radius: 20px;
-    border: 2px solid #d4af37;
-    background: #111;
-    color: #fff;
-    outline: none;
-    transition: width 0.3s;
-}
-
-.header__search input:focus {
-    width: 170px;
-}
-
-.header__search button {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: none;
-    background: #d4af37;
-    color: #000;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .3s;
-}
-
-.header__search button:hover {
-    transform: scale(1.08);
+.search__btn:hover {
+    transform: scale(1.05);
 }
 
 /* ============================================================
    DROPDOWN (SUB MENU)
    ============================================================ */
+.header__dropdown {
+    position: relative;
+}
+
 .dropdown {
     display: none;
     position: absolute;
@@ -376,23 +246,16 @@ body {
     border: 1px solid #d4af37;
     border-radius: 6px;
     padding: 16px 20px;
-    min-width: 230px;
+    min-width: 210px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
     z-index: 999;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    margin-top: 2px;
 }
 
-.nav__item--has-dropdown:hover .dropdown {
+.header__dropdown:hover .dropdown {
     display: flex;
-}
-
-.nav__item--has-dropdown:hover .nav__arrow {
-    transform: rotate(180deg);
-}
-
-.dropdown__group {
-    margin-bottom: 4px;
 }
 
 .dropdown__title {
@@ -403,8 +266,7 @@ body {
     text-transform: uppercase;
     border-bottom: 1px solid #333;
     padding-bottom: 4px;
-    margin-bottom: 6px;
-    display: block;
+    margin-bottom: 4px;
 }
 
 .dropdown__group ul {
@@ -419,7 +281,6 @@ body {
     padding: 6px 8px;
     border-radius: 4px;
     display: block;
-    transition: background 0.3s, color 0.3s;
 }
 
 .dropdown__group ul li a:hover {
@@ -447,17 +308,6 @@ body {
     background: #d4af37;
     border-radius: 3px;
     transition: 0.3s;
-}
-
-/* Animação do botão Hamburguer transformando em 'X' */
-.hamburger.open .hamburger__bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-.hamburger.open .hamburger__bar:nth-child(2) {
-    opacity: 0;
-}
-.hamburger.open .hamburger__bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ============================================================
@@ -529,10 +379,10 @@ body {
     text-transform: uppercase;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
     display: flex;
     align-items: center;
     gap: 6px;
+    transition: background 0.3s, color 0.3s;
 }
 
 .btn-voltar:hover {
@@ -630,7 +480,6 @@ body {
 .footer__social a {
     color: #aaaaaa;
     font-size: 1.3rem;
-    transition: color 0.3s;
 }
 
 .footer__social a:hover {
@@ -641,28 +490,38 @@ body {
    RESPONSIVIDADE (Telas de Notebooks até Smartphones)
    ============================================================ */
 
+/* Redução sutil em notebooks para preservar o espaço em linha */
 @media (max-width: 1366px) {
-    .nav__list {
-        gap: 8px;
+    .header__main-container {
+        grid-template-columns: 1fr 140px 1fr;
     }
-    .nav__link {
-        font-size: 0.78rem;
+    .header__left, .header__right {
+        gap: 12px;
     }
-    .header__search input {
-        width: 110px;
+    .header__link {
+        font-size: 12px;
     }
-    .header__search input:focus {
-        width: 130px;
+    .header__logo {
+        height: 70px;
     }
 }
 
-/* Gatilho Mobile total em 1024px devido ao volume de itens em linha */
+/* Gatilho Mobile unificado em 1024px */
 @media (max-width: 1024px) {
-    .header {
+    body {
+        padding-top: 80px; /* Ajuste do espaçamento do corpo no mobile */
+    }
+
+    .header__top {
+        display: none; /* Simplifica o menu mobile ocultando a barra superior */
+    }
+
+    .header__main {
         height: 80px;
     }
 
-    .header__inner {
+    .header__main-container {
+        display: flex !important;
         justify-content: space-between;
     }
 
@@ -670,26 +529,17 @@ body {
         display: flex;
     }
 
-    .header__center {
-        position: static;
-        transform: none;
-        left: auto;
-        top: auto;
-        width: auto;
-    }
-
-    .logo__img {
+    .header__logo {
         height: 60px;
     }
 
-    /* Container de navegação Mobile (Esquerda e Direita unificados) */
+    /* Gavetas laterais Mobile dinâmicas */
     .header__left,
     .header__right {
         position: fixed;
         top: 80px;
         background: #0a0a0a;
         width: 100%;
-        max-width: 100% !important;
         left: -100%;
         height: calc(50vh - 40px);
         flex-direction: column;
@@ -700,6 +550,7 @@ body {
         overflow-y: auto;
         z-index: 999;
         border-bottom: 1px solid #222;
+        gap: 15px;
     }
 
     .header__right {
@@ -708,48 +559,40 @@ body {
         border-bottom: 2px solid #d4af37;
     }
 
-    /* Quando abertos via JS */
-    .header__left.open {
-        left: 0;
-    }
-
+    /* Classes acionadas pelo JavaScript */
+    .header__left.open,
     .header__right.open {
         left: 0;
     }
 
-    .nav__list {
+    .header__nav {
         flex-direction: column;
         width: 100%;
         gap: 15px;
     }
 
-    .nav__item {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav__link {
+    .header__link {
         font-size: 1rem;
         justify-content: center;
-        padding: 10px;
+        width: 100%;
+        text-align: center;
         border-bottom: none;
     }
 
-    .nav__link.active {
+    .header__link.active {
         background: rgba(212, 175, 55, 0.1);
     }
 
     .header__search {
-        margin-top: 15px;
-        width: 100%;
-        justify-content: center;
+        margin-top: 10px;
+        width: 80%;
+        justify-content: space-between;
     }
 
-    .header__search input {
-        width: 70% !important;
+    .search__input {
+        width: 80%;
     }
 
-    /* Submenu Dropdown Adaptado para Mobile */
     .dropdown {
         position: static;
         background: #111;
@@ -760,16 +603,11 @@ body {
         margin-top: 5px;
         padding: 10px;
         width: 100%;
-        display: none;
-    }
-
-    .nav__item--has-dropdown.open .dropdown {
-        display: flex;
     }
 }
 
 @media (max-width: 480px) {
-    .logo__img {
+    .header__logo {
         height: 50px;
     }
     .page-home h1 {
@@ -781,643 +619,5 @@ body {
     .footer__inner {
         flex-direction: column;
         text-align: center;
-    }
-}/* ============================================================
-   RESET & BASE
-   ============================================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #000000;
-    color: #f0f0f0;
-    font-family: "Roboto", sans-serif;
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s, background-color 0.3s;
-}
-
-ul {
-    list-style: none;
-}
-
-.container {
-    max-width: 1440px; /* Expandido para dar mais espaço e evitar quebras de texto */
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* ============================================================
-   TIPOGRAFIA
-   ============================================================ */
-h1, h2, h3, h4 {
-    font-family: "Oswald", sans-serif;
-    font-weight: 700;
-}
-
-h1 {
-    font-size: 2.8rem;
-    color: #d4af37;
-    margin-bottom: 1rem;
-}
-
-h2 {
-    font-size: 2.2rem;
-    color: #d4af37;
-    border-bottom: 2px solid #d4af37;
-    display: inline-block;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1.5rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-    color: #d4af37;
-    margin: 1.2rem 0 0.5rem;
-}
-
-p {
-    margin-bottom: 1rem;
-    color: #e0e0e0;
-}
-
-/* ============================================================
-   HEADER & CONTAINER (Grid de Alinhamento Matemático Central)
-   ============================================================ */
-.header {
-    background: #0a0a0a;
-    border-bottom: 2px solid #d4af37;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    height: 130px; /* Fixado para estabilizar o alinhamento vertical */
-    display: flex;
-    align-items: center;
-}
-
-.header__inner {
-    display: grid !important;
-    /* Divide o cabeçalho em 3 áreas: Esquerda livre, Centro fixo em 180px, Direita livre */
-    grid-template-columns: 1fr 180px 1fr;
-    align-items: center;
-    width: 100%;
-}
-
-/* ============================================================
-   COLUNAS DO HEADER
-   ============================================================ */
-.header__left {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-}
-
-.header__center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.header__right {
-    display: flex;
-    justify-content: flex-end;   
-    align-items: center;
-    gap: 20px; /* Espaço seguro entre o fim do menu e a caixa de busca */
-}
-
-/* ============================================================
-   LOGO
-   ============================================================ */
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo__img {
-    height: 110px; /* Dimensão perfeita para não encostar na borda dourada */
-    width: auto;
-    border-radius: 50%;
-    object-fit: contain;
-    display: block;
-    transition: transform .3s ease;
-}
-
-.logo__img:hover {
-    transform: scale(1.05);
-}
-
-/* ============================================================
-   MENUS DESKTOP
-   ============================================================ */
-.nav {
-    display: flex;
-}
-
-.nav__list {
-    display: flex;
-    align-items: center;
-    gap: 14px; /* Espaçamento ideal para telas padrão */
-}
-
-.nav__item {
-    position: relative;
-    white-space: nowrap;
-}
-
-.nav__link {
-    font-family: "Oswald", sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #ccc;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
-    transition: .3s;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.nav__link:hover,
-.nav__link.active {
-    color: #d4af37;
-    border-bottom-color: #d4af37;
-}
-
-/* ============================================================
-   BARRA DE BUSCA
-   ============================================================ */
-.header__search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
-.header__search input {
-    width: 160px;
-    height: 38px;
-    padding: 0 15px;
-    border-radius: 20px;
-    border: 2px solid #d4af37;
-    background: #111;
-    color: #fff;
-    outline: none;
-}
-
-.header__search button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: #d4af37;
-    color: #000;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .3s;
-}
-
-.header__search button:hover {
-    transform: scale(1.08);
-}
-
-/* ============================================================
-   DROPDOWN (SUB MENU)
-   ============================================================ */
-.dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #111111;
-    border: 1px solid #d4af37;
-    border-radius: 6px;
-    padding: 16px 20px;
-    min-width: 210px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-    z-index: 999;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.nav__item--has-dropdown:hover .dropdown {
-    display: flex;
-}
-
-.dropdown__group {
-    margin-bottom: 4px;
-}
-
-.dropdown__title {
-    font-family: "Oswald", sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: #d4af37;
-    text-transform: uppercase;
-    border-bottom: 1px solid #333;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-}
-
-.dropdown__group ul {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.dropdown__group ul li a {
-    font-size: 0.9rem;
-    color: #dddddd;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: block;
-    transition: background 0.3s, color 0.3s;
-}
-
-.dropdown__group ul li a:hover {
-    background: #d4af37;
-    color: #000000;
-}
-
-/* ============================================================
-   HAMBURGUER (MOBILE)
-   ============================================================ */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    z-index: 10;
-}
-
-.hamburger__bar {
-    width: 28px;
-    height: 3px;
-    background: #d4af37;
-    border-radius: 3px;
-    transition: 0.3s;
-}
-
-/* ============================================================
-   MAIN – ÁREA DE CONTEÚDO
-   ============================================================ */
-.main {
-    flex: 1;
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.page-home {
-    text-align: center;
-    padding: 50px 20px;
-}
-
-.page-home h1 {
-    font-size: 3.5rem;
-}
-
-.page-home .lead {
-    font-size: 1.3rem;
-    color: #cccccc;
-    max-width: 700px;
-    margin: 20px auto;
-}
-
-/* ============================================================
-   BREADCRUMB E BOTÃO VOLTAR
-   ============================================================ */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #333;
-}
-
-.breadcrumb {
-    font-size: 0.85rem;
-    color: #aaaaaa;
-    font-family: "Roboto", sans-serif;
-}
-
-.breadcrumb a {
-    color: #d4af37;
-    transition: color 0.3s;
-}
-
-.breadcrumb a:hover {
-    color: #ffffff;
-}
-
-.breadcrumb span {
-    color: #888888;
-}
-
-.btn-voltar {
-    background: transparent;
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    padding: 6px 18px;
-    border-radius: 4px;
-    font-family: "Oswald", sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-}
-
-.btn-voltar:hover {
-    background: #d4af37;
-    color: #000000;
-}
-
-/* ============================================================
-   CARDS
-   ============================================================ */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin: 30px 0;
-}
-
-.card {
-    background: #111111;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 20px;
-    transition: border-color 0.3s, transform 0.2s;
-}
-
-.card:hover {
-    border-color: #d4af37;
-    transform: translateY(-4px);
-}
-
-.card h3 {
-    margin-top: 0;
-}
-
-.card p {
-    color: #bbbbbb;
-}
-
-/* ============================================================
-   TABELA DE JOGOS
-   ============================================================ */
-.table-games {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-.table-games th,
-.table-games td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #333;
-    text-align: left;
-}
-
-.table-games th {
-    background: #1a1a1a;
-    color: #d4af37;
-    font-family: "Oswald", sans-serif;
-    text-transform: uppercase;
-}
-
-.table-games tr:hover td {
-    background: #0f0f0f;
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer {
-    background: #0a0a0a;
-    border-top: 2px solid #d4af37;
-    padding: 20px 0;
-    margin-top: 30px;
-}
-
-.footer__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.footer p {
-    margin: 0;
-    color: #888888;
-    font-size: 0.9rem;
-}
-
-.footer__social {
-    display: flex;
-    gap: 18px;
-}
-
-.footer__social a {
-    color: #aaaaaa;
-    font-size: 1.3rem;
-    transition: color 0.3s;
-}
-
-.footer__social a:hover {
-    color: #d4af37;
-}
-
-/* ============================================================
-   RESPONSIVIDADE & AJUSTES DE TELA
-   ============================================================ */
-
-/* Ajuste Fino de Proteção: Evita quebra de palavras em telas médias (Notebooks comuns) */
-@media (min-width: 769px) and (max-width: 1366px) {
-    .nav__list {
-        gap: 8px; /* Diminui o espaço entre palavras para não esmagar contra o centro */
-    }
-    .nav__link {
-        font-size: 0.78rem; /* Reduz levemente o texto do link */
-    }
-    .header__search input {
-        width: 130px; /* Diminui ligeiramente o input de busca */
-    }
-}
-
-/* Telas médias menores (até 992px) */
-@media (max-width: 992px) {
-    .nav__list {
-        gap: 0.5rem 1rem;
-    }
-    .nav__link {
-        font-size: 0.8rem;
-    }
-}
-
-/* Tablets e celulares (até 768px) – Ativação total do menu mobile */
-@media (max-width: 768px) {
-    .header {
-        height: auto; /* Permite expansão vertical no mobile */
-    }
-    
-    .header__inner {
-        display: flex !important; /* Desativa a grid rígida no mobile */
-        flex-wrap: wrap;
-        justify-content: center;
-        min-height: 60px;
-        padding: 10px 20px;
-    }
-
-    .header__left,
-    .header__right {
-        flex: 1 1 100%;
-        justify-content: center;
-        display: none; /* Oculta os itens do menu por padrão no mobile */
-        order: 2;
-    }
-
-    .header__left.open,
-    .header__right.open {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-        border-top: 1px solid #222;
-        padding-top: 10px;
-    }
-
-    .header__center {
-        flex: 1 1 100%;
-        order: 1;
-        justify-content: center;
-    }
-
-    .header__right {
-        order: 3;
-    }
-
-    .hamburger {
-        display: flex;
-        position: absolute;
-        right: 20px;
-        top: 15px;
-    }
-
-    .header__search {
-        display: none; /* Oculta a caixa de busca nativa no menu colapsado mobile */
-    }
-
-    .logo__img {
-        height: 50px; /* Tamanho compacto reduzido automático para smartphones */
-    }
-
-    .nav__list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.3rem 0.8rem;
-    }
-
-    .nav__item {
-        white-space: normal;
-        width: auto;
-        text-align: center;
-    }
-
-    .nav__link {
-        font-size: 0.85rem;
-        padding: 8px 12px;
-        border-bottom: none;
-        justify-content: center;
-    }
-
-    .nav__link.active {
-        border-bottom: none;
-        background: rgba(212, 175, 55, 0.1);
-    }
-
-    .dropdown {
-        position: static;
-        background: #0d0d0d;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        padding: 8px 0 8px 20px;
-        width: 100%;
-    }
-
-    .nav__item--has-dropdown.open .dropdown {
-        display: flex;
-    }
-
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .btn-voltar {
-        align-self: flex-start;
-    }
-
-    .page-home h1 {
-        font-size: 2.5rem;
-    }
-
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    .footer__inner {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-/* Celulares pequenos (até 480px) */
-@media (max-width: 480px) {
-    .logo__img {
-        height: 45px;
-    }
-    .main {
-        padding: 20px 12px;
-    }
-    .nav__link {
-        font-size: 0.75rem;
-        padding: 6px 8px;
-    }
-    .nav__list {
-        gap: 0.2rem 0.5rem;
     }
 }
