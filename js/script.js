@@ -387,7 +387,6 @@ function pesquisar() {
 
     alert("Nenhum resultado encontrado.");
 }
-
   function init() {
     const hash = window.location.hash.replace("#", "");
     loadContent(hash || "home");
