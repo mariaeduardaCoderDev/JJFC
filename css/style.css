@@ -100,40 +100,27 @@
 /* ============================================================
    COLUNAS (Distâncias simétricas e proteção contra quebras)
    ============================================================ */
-.header__left {
+.header {
+    background: #0a0a0a;
+    border-bottom: 2px solid #d4af37;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 130px; /* Altura fixa para alinhar tudo perfeitamente na linha do horizonte */
     display: flex;
-    justify-content: flex-start; 
     align-items: center;
-    /* Adiciona uma margem interna para o texto não encostar no escudo se a tela encolher */
-    padding-right: 80px; 
 }
 
-.header__center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-    z-index: 10;
-    display: flex;
-    justify-content: center;
+.header__inner {
+    display: grid !important; /* Força o comportamento grid mesmo com a classe .container injetada */
+    /* Divide em: Esquerda Flexível | Centro Fixo Proporcional | Direita Flexível */
+    grid-template-columns: 1fr 180px 1fr; 
     align-items: center;
-    pointer-events: none; /* Garante que a área invisível do bloco não bloqueie cliques nos links */
+    width: 100%;
+    max-width: 1440px; /* Alarga a área de trabalho para os menus não se espremerem */
+    margin: 0 auto;
+    padding: 0 20px;
 }
-
-.header__center * {
-    pointer-events: auto; /* Devolve os cliques apenas para o logo em si */
-}
-
-.header__right {
-    display: flex;
-    justify-content: flex-end;   
-    align-items: center;
-    gap: 15px;
-    /* Adiciona a mesma margem interna idêntica ao lado esquerdo para manter a simetria visual */
-    padding-left: 80px; 
-}
-
-
 /* ============================================================
    COLUNAS 
    ============================================================ */
@@ -141,22 +128,19 @@
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    padding-right: 20px; /* Espaço de segurança para não colidir com o escudo */
 }
 
 .header__center {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
 }
 
 .header__right {
     display: flex;
     justify-content: flex-end;   
     align-items: center;
-    gap: 15px;
-    padding-left: 20px; /* Espaço de segurança para não colidir com o escudo */
+    gap: 20px; /* Espaçamento controlado entre o menu 2 e a barra de busca */
 }
 /* ============================================================
    LOGO
@@ -174,7 +158,7 @@
 }
 
 .logo__img {
-    height: 110px; /* Altura ideal que mantém o escudo imponente sem estourar */
+    height: 110px; /* Dimensão ideal para respeitar a margem superior e inferior do menu */
     width: auto;
     border-radius: 50%;
     object-fit: contain;
@@ -184,6 +168,20 @@
 
 .logo__img:hover {
     transform: scale(1.05);
+}
+/* ============================================================
+   PROTEÇÃO DE TEXTO (Ajuste fino nos menus para telas de notebooks)
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1300px) {
+    .nav__link {
+        font-size: 0.75rem; /* Encolhe ligeiramente a fonte em telas médias para evitar qualquer quebra */
+    }
+    .nav__list {
+        gap: 8px; /* Ajusta o respiro entre os links */
+    }
+    .header__search input {
+        width: 130px; /* Encolhe ligeiramente o input de busca caso a tela seja menor */
+    }
 }
 /* ============================================================
    MENUS
