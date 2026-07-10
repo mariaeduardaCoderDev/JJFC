@@ -1,13 +1,13 @@
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
-* {
+    /* ============================================================
+    RESET & BASE
+    ============================================================ */
+    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+    }
 
-body {
+    body {
     background-color: #000000;
     color: #f0f0f0;
     font-family: "Roboto", sans-serif;
@@ -15,228 +15,178 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 145px; /* Altura exata para o conteúdo não sumir sob as duas barras fixas */
-}
+    }
 
-a {
+    a {
     text-decoration: none;
     color: inherit;
-    transition: color 0.3s, background-color 0.3s;
-}
+    transition:
+        color 0.3s,
+        background-color 0.3s;
+    }
 
-ul {
+    ul {
     list-style: none;
-}
+    }
 
-.container {
-    max-width: 1440px;
+    .container {
+    max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
-    width: 100%;
-}
+    }
 
-/* ============================================================
-   TIPOGRAFIA
-   ============================================================ */
-h1, h2, h3, h4 {
+    /* ============================================================
+    TIPOGRAFIA
+    ============================================================ */
+    h1,
+    h2,
+    h3,
+    h4 {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
-}
+    }
 
-h1 {
+    h1 {
     font-size: 2.8rem;
     color: #d4af37;
     margin-bottom: 1rem;
-}
+    }
 
-h2 {
+    h2 {
     font-size: 2.2rem;
     color: #d4af37;
     border-bottom: 2px solid #d4af37;
     display: inline-block;
     padding-bottom: 0.3rem;
     margin-bottom: 1.5rem;
-}
+    }
 
-h3 {
+    h3 {
     font-size: 1.5rem;
     color: #d4af37;
     margin: 1.2rem 0 0.5rem;
-}
+    }
 
-p {
+    p {
     margin-bottom: 1rem;
     color: #e0e0e0;
-}
+    }
 
-/* ============================================================
-   HEADER PRINCIPAL (Estrutura Unificada de Barra Dupla)
-   ============================================================ */
-.header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-/* 1. Barra Superior (Links de Apoio) */
-.header__top {
-    background-color: #0d0d0d;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 8px 0;
-}
-
-.header__top-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: flex-end;
-    gap: 25px;
-    padding: 0 20px;
-}
-
-.header__top .header__link {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #b3b3b3;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.header__top .header__link:hover {
-    color: #d4af37;
-}
-
-/* 2. Barra Principal (Grid Matemática Alinhada) */
-.header__main {
-    background-color: #000000;
+    /* ============================================================
+    HEADER – ESTRUTURA DE TRÊS COLUNAS (ESQUERDA, CENTRO, DIREITA)
+    ============================================================ */
+    .header {
+    background: #0a0a0a;
     border-bottom: 2px solid #d4af37;
-    padding: 8px 0;
-    height: 100px;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    }
+
+    .header__inner {
     display: flex;
     align-items: center;
-}
+    justify-content: space-between;
+    flex-wrap: nowrap; /* força uma única linha em desktop */
+    gap: 10px;
+    position: relative;
+    min-height: 70px;
+    }
 
-.header__main-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    display: grid;
-    /* Divide em 3 colunas perfeitas: Menu Esquerdo | Escudo Central (160px) | Menu Direito + Busca */
-    grid-template-columns: 1fr 160px 1fr;
-    align-items: center;
-    width: 100%;
-    padding: 0 20px;
-}
-
-/* Alinhamento dos Blocos Laterais */
-.header__left {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-}
-
-.header__right {
-    display: flex;
-    justify-content: flex-end;   
-    align-items: center;
-    gap: 25px;
-}
-
-.header__nav {
+    /* Colunas laterais – não esticam, mantêm conteúdo justado */
+    .header__left,
+    .header__right {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
-    gap: 16px;
-}
+    }
+    .header__left {
+    justify-content: flex-start;
+    }
+    .header__right {
+    justify-content: flex-end;
+    gap: 12px;
+    }
 
-/* Links da Barra Principal */
-.header__link {
-    color: #ffffff;
-    font-family: "Oswald", sans-serif;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
-}
-
-.header__link:hover,
-.header__link.active {
-    color: #d4af37;
-    border-bottom-color: #d4af37;
-}
-
-/* 3. Escudo Centralizado */
-.header__logo-container {
+    /* Coluna central – escudo */
+    .header__center {
+    flex: 0 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-}
+    }
 
-.header__logo {
-    height: 85px; /* Tamanho exato para ficar contido dentro dos 100px da barra */
+    /* ============================================================
+    LOGO (APENAS A IMAGEM, SEM TEXTO)
+    ============================================================ */
+    .logo a {
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+    }
+    .logo a:hover {
+    color: #d4af37;
+    }
+    .logo__img {
+    height: 200px; /* ajuste conforme a sua imagem */
     width: auto;
     display: block;
-    transition: transform 0.3s ease;
-}
+    }
 
-.header__logo:hover {
-    transform: scale(1.05);
-}
-
-/* 4. Caixa de Busca */
-.header__search {
+    /* ============================================================
+    MENU – LINKS LADO A LADO, SEM QUEBRA
+    ============================================================ */
+    .nav {
     display: flex;
-    align-items: center;
-    background: #111111;
-    border: 2px solid #d4af37;
-    border-radius: 20px;
-    padding: 2px 6px 2px 14px;
-    height: 38px;
-}
-
-.search__input {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 12px;
-    outline: none;
-    width: 110px;
-    transition: width 0.3s;
-}
-
-.search__input:focus {
-    width: 140px;
-}
-
-.search__btn {
-    background: #d4af37;
-    border: none;
-    color: #000;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+    }
+    .nav__list {
     display: flex;
+    flex-wrap: nowrap; /* não quebra em telas grandes */
+    gap: 0.8rem 1.5rem; /* espaçamento vertical / horizontal */
     align-items: center;
-    justify-content: center;
-    transition: transform 0.3s;
-}
+    margin: 0;
+    padding: 0;
+    }
 
-.search__btn:hover {
-    transform: scale(1.05);
-}
-
-/* ============================================================
-   DROPDOWN (SUB MENU)
-   ============================================================ */
-.header__dropdown {
+    .nav__item {
     position: relative;
-}
+    white-space: nowrap; /* impede que o texto do link quebre */
+    }
 
-.dropdown {
+    .nav__link {
+    font-family: "Oswald", sans-serif;
+    font-size: 0.9rem; /* tamanho para caber todos na linha */
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #cccccc;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition:
+        color 0.3s,
+        border-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    }
+
+    .nav__link:hover,
+    .nav__link.active {
+    color: #d4af37;
+    border-bottom-color: #d4af37;
+    }
+
+    .nav__arrow {
+    font-size: 0.6rem;
+    transition: transform 0.3s;
+    }
+    .nav__item--has-dropdown:hover .nav__arrow {
+    transform: rotate(180deg);
+    }
+
+    /* ============================================================
+    DROPDOWN (SUB MENU)
+    ============================================================ */
+    .dropdown {
     display: none;
     position: absolute;
     top: 100%;
@@ -250,14 +200,16 @@ p {
     z-index: 999;
     flex-direction: column;
     gap: 10px;
-    margin-top: 2px;
-}
+    }
 
-.header__dropdown:hover .dropdown {
+    .nav__item--has-dropdown:hover .dropdown {
     display: flex;
-}
+    }
 
-.dropdown__title {
+    .dropdown__group {
+    margin-bottom: 4px;
+    }
+    .dropdown__title {
     font-family: "Oswald", sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
@@ -266,31 +218,53 @@ p {
     border-bottom: 1px solid #333;
     padding-bottom: 4px;
     margin-bottom: 4px;
-}
-
-.dropdown__group ul {
+    }
+    .dropdown__group ul {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-}
-
-.dropdown__group ul li a {
+    gap: 2px;
+    }
+    .dropdown__group ul li a {
     font-size: 0.9rem;
     color: #dddddd;
-    padding: 6px 8px;
+    padding: 4px 8px;
     border-radius: 4px;
     display: block;
-}
-
-.dropdown__group ul li a:hover {
+    transition:
+        background 0.3s,
+        color 0.3s;
+    }
+    .dropdown__group ul li a:hover {
     background: #d4af37;
     color: #000000;
-}
+    }
 
-/* ============================================================
-   HAMBURGUER (MOBILE)
-   ============================================================ */
-.hamburger {
+    /* ============================================================
+    BUSCA (À DIREITA)
+    ============================================================ */
+    .header__search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaaaaa;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    white-space: nowrap;
+    }
+    .header__search:hover {
+    color: #d4af37;
+    }
+    .search-label {
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+    HAMBURGUER (MOBILE)
+    ============================================================ */
+    .hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
@@ -298,59 +272,46 @@ p {
     border: none;
     cursor: pointer;
     padding: 6px;
-    z-index: 1010;
-}
-
-.hamburger__bar {
+    z-index: 10;
+    }
+    .hamburger__bar {
     width: 28px;
     height: 3px;
     background: #d4af37;
     border-radius: 3px;
     transition: 0.3s;
-}
+    }
 
-/* Animação do botão ao abrir (se você usar JS para adicionar a classe .open) */
-.hamburger.open .hamburger__bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-.hamburger.open .hamburger__bar:nth-child(2) {
-    opacity: 0;
-}
-.hamburger.open .hamburger__bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-/* ============================================================
-   MAIN – ÁREA DE CONTEÚDO
-   ============================================================ */
-.main {
+    /* ============================================================
+    MAIN – ÁREA DE CONTEÚDO
+    ============================================================ */
+    .main {
     flex: 1;
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-}
+    }
 
-.page-home {
+    /* Página inicial (home) */
+    .page-home {
     text-align: center;
     padding: 50px 20px;
-}
-
-.page-home h1 {
+    }
+    .page-home h1 {
     font-size: 3.5rem;
-}
-
-.page-home .lead {
+    }
+    .page-home .lead {
     font-size: 1.3rem;
     color: #cccccc;
     max-width: 700px;
     margin: 20px auto;
-}
+    }
 
-/* ============================================================
-   BREADCRUMB E BOTÃO VOLTAR
-   ============================================================ */
-.page-header {
+    /* ============================================================
+    BREADCRUMB E BOTÃO VOLTAR
+    ============================================================ */
+    .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -359,26 +320,25 @@ p {
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid #333;
-}
+    }
 
-.breadcrumb {
+    .breadcrumb {
     font-size: 0.85rem;
     color: #aaaaaa;
-}
-
-.breadcrumb a {
+    font-family: "Roboto", sans-serif;
+    }
+    .breadcrumb a {
     color: #d4af37;
-}
-
-.breadcrumb a:hover {
+    transition: color 0.3s;
+    }
+    .breadcrumb a:hover {
     color: #ffffff;
-}
-
-.breadcrumb span {
+    }
+    .breadcrumb span {
     color: #888888;
-}
+    }
 
-.btn-voltar {
+    .btn-voltar {
     background: transparent;
     border: 1px solid #d4af37;
     color: #d4af37;
@@ -389,249 +349,282 @@ p {
     text-transform: uppercase;
     font-size: 0.85rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.3s, color 0.3s;
-}
-
-.btn-voltar:hover {
+    transition:
+        background 0.3s,
+        color 0.3s;
+    }
+    .btn-voltar:hover {
     background: #d4af37;
     color: #000000;
-}
+    }
 
-/* ============================================================
-   CARDS
-   ============================================================ */
-.card-grid {
+    /* ============================================================
+    CARDS
+    ============================================================ */
+    .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
     margin: 30px 0;
-}
-
-.card {
+    }
+    .card {
     background: #111111;
     border: 1px solid #333;
     border-radius: 8px;
     padding: 20px;
-    transition: border-color 0.3s, transform 0.2s;
-}
-
-.card:hover {
+    transition:
+        border-color 0.3s,
+        transform 0.2s;
+    }
+    .card:hover {
     border-color: #d4af37;
     transform: translateY(-4px);
-}
-
-.card h3 {
+    }
+    .card h3 {
     margin-top: 0;
-}
-
-.card p {
+    }
+    .card p {
     color: #bbbbbb;
-}
+    }
 
-/* ============================================================
-   TABELA DE JOGOS
-   ============================================================ */
-.table-games {
+    /* ============================================================
+    TABELA DE JOGOS
+    ============================================================ */
+    .table-games {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-}
-
-.table-games th,
-.table-games td {
+    }
+    .table-games th,
+    .table-games td {
     padding: 12px 15px;
     border-bottom: 1px solid #333;
     text-align: left;
-}
-
-.table-games th {
+    }
+    .table-games th {
     background: #1a1a1a;
     color: #d4af37;
     font-family: "Oswald", sans-serif;
     text-transform: uppercase;
-}
-
-.table-games tr:hover td {
+    }
+    .table-games tr:hover td {
     background: #0f0f0f;
-}
+    }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer {
+    /* ============================================================
+    FOOTER
+    ============================================================ */
+    .footer {
     background: #0a0a0a;
     border-top: 2px solid #d4af37;
     padding: 20px 0;
-    margin-top: auto;
-}
-
-.footer__inner {
+    margin-top: 30px;
+    }
+    .footer__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
-}
-
-.footer p {
+    }
+    .footer p {
     margin: 0;
     color: #888888;
     font-size: 0.9rem;
-}
-
-.footer__social {
+    }
+    .footer__social {
     display: flex;
     gap: 18px;
-}
-
-.footer__social a {
+    }
+    .footer__social a {
     color: #aaaaaa;
     font-size: 1.3rem;
-}
-
-.footer__social a:hover {
+    transition: color 0.3s;
+    }
+    .footer__social a:hover {
     color: #d4af37;
-}
+    }
 
-/* ============================================================
-   RESPONSIVIDADE AJUSTADA (Prevenção de Quebras)
-   ============================================================ */
+    /* ============================================================
+    RESPONSIVIDADE
+    ============================================================ */
 
-/* Notebooks e telas médias: encolhe os espaçamentos dinamicamente */
-@media (max-width: 1366px) {
-    .header__main-container {
-        grid-template-columns: 1fr 130px 1fr;
+    /* Telas médias (até 992px) – reduz espaçamentos */
+    @media (max-width: 992px) {
+    .nav__list {
+        gap: 0.5rem 1rem;
+    }
+    .nav__link {
+        font-size: 0.8rem;
+    }
+    .logo__img {
+        height: 45px;
+    }
+    }
+
+    /* Tablets e celulares grandes (até 768px) – menu hambúrguer */
+    @media (max-width: 768px) {
+    .header__inner {
+        flex-wrap: wrap; /* permite quebra para o mobile */
+        justify-content: center;
+        min-height: 60px;
+    }
+
+    .header__left,
+    .header__right {
+        flex: 1 1 100%;
+        justify-content: center;
+        display: none; /* escondido por padrão */
+        order: 2;
+    }
+    .header__left.open,
+    .header__right.open {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        border-top: 1px solid #222;
+        padding-top: 10px;
+    }
+
+    .header__center {
+        flex: 1 1 100%;
+        order: 1;
+        justify-content: center;
     }
     .header__right {
-        gap: 12px;
-    }
-    .header__nav {
-        gap: 10px;
-    }
-    .header__link {
-        font-size: 12px;
-    }
-    .header__logo {
-        height: 70px;
-    }
-}
-
-/* Ativação do Menu Mobile em 1024px para evitar que os links batam no escudo */
-@media (max-width: 1024px) {
-    body {
-        padding-top: 80px; 
-    }
-
-    .header__top {
-        display: none; /* Esconde a barra menor no mobile para simplificar o layout */
-    }
-
-    .header__main {
-        height: 80px;
-    }
-
-    .header__main-container {
-        display: flex !important;
-        justify-content: space-between;
+        order: 3;
     }
 
     .hamburger {
         display: flex;
-    }
-
-    .header__logo {
-        height: 60px;
-    }
-
-    /* Transforma as colunas em "gavetas" expansíveis verticais */
-    .header__left,
-    .header__right {
-        position: fixed;
-        top: 80px;
-        background: #0a0a0a;
-        width: 100%;
-        left: -100%;
-        height: calc(50vh - 40px);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 20px;
-        transition: left 0.4s ease;
-        overflow-y: auto;
-        z-index: 999;
-        border-bottom: 1px solid #222;
-        gap: 15px;
-    }
-
-    .header__right {
-        top: calc(50vh + 40px);
-        height: calc(50vh - 40px);
-        border-bottom: 2px solid #d4af37;
-    }
-
-    /* Classes acionadas quando o menu mobile está aberto */
-    .header__left.open,
-    .header__right.open {
-        left: 0;
-    }
-
-    .header__nav {
-        flex-direction: column;
-        width: 100%;
-        gap: 15px;
-    }
-
-    .header__link {
-        font-size: 1rem;
-        justify-content: center;
-        width: 100%;
-        text-align: center;
-        border-bottom: none;
-    }
-
-    .header__link.active {
-        background: rgba(212, 175, 55, 0.1);
+        position: absolute;
+        right: 20px;
+        top: 12px;
     }
 
     .header__search {
-        margin-top: 10px;
-        width: 90%;
-        justify-content: space-between;
+        display: none; /* opcional: esconde a busca no mobile */
     }
 
-    .search__input {
-        width: 80%;
+    .logo__img {
+        height: 40px;
     }
 
+    /* Menu mobile: itens empilhados verticalmente */
+    .nav__list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem 0.8rem;
+    }
+    .nav__item {
+        white-space: normal;
+        width: auto;
+        text-align: center;
+        border-bottom: none;
+    }
+    .nav__link {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        border-bottom: none;
+        justify-content: center;
+        width: auto;
+    }
+    .nav__link.active {
+        border-bottom: none;
+        background: rgba(212, 175, 55, 0.1);
+    }
+
+    /* Dropdown em acordeão no mobile */
     .dropdown {
+        display: none;
         position: static;
-        background: #111;
-        box-shadow: none;
+        background: #0d0d0d;
         border: none;
-        border-left: 2px solid #d4af37;
         border-radius: 0;
-        margin-top: 5px;
-        padding: 10px;
+        box-shadow: none;
+        padding: 8px 0 8px 20px;
         width: 100%;
     }
-}
-
-/* Ajustes finos para smartphones */
-@media (max-width: 480px) {
-    .header__logo {
-        height: 50px;
+    .nav__item--has-dropdown.open .dropdown {
+        display: flex;
     }
+
+    /* Ajustes de conteúdo */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .btn-voltar {
+        align-self: flex-start;
+    }
+
     .page-home h1 {
+        font-size: 2.5rem;
+    }
+    h1 {
         font-size: 2.2rem;
     }
     h2 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
+
     .footer__inner {
         flex-direction: column;
         text-align: center;
     }
+    }
+
+    /* Celulares pequenos (até 480px) */
+    @media (max-width: 480px) {
+    .logo__img {
+        height: 35px;
+    }
+    .main {
+        padding: 20px 12px;
+    }
+    .nav__link {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+    .nav__list {
+        gap: 0.2rem 0.5rem;
+    }
+    }
+.header__search{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.header__search input{
+
+    width:180px;
+
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    border:2px solid #D4AF37;
+
+    background:#111;
+
+    color:white;
+
+}
+
+.header__search button{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#D4AF37;
+
+    cursor:pointer;
+
 }
