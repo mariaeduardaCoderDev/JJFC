@@ -1,0 +1,630 @@
+    /* ============================================================
+    RESET & BASE
+    ============================================================ */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    background-color: #000000;
+    color: #f0f0f0;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    }
+
+    a {
+    text-decoration: none;
+    color: inherit;
+    transition:
+        color 0.3s,
+        background-color 0.3s;
+    }
+
+    ul {
+    list-style: none;
+    }
+
+    .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+    }
+
+    /* ============================================================
+    TIPOGRAFIA
+    ============================================================ */
+    h1,
+    h2,
+    h3,
+    h4 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 700;
+    }
+
+    h1 {
+    font-size: 2.8rem;
+    color: #d4af37;
+    margin-bottom: 1rem;
+    }
+
+    h2 {
+    font-size: 2.2rem;
+    color: #d4af37;
+    border-bottom: 2px solid #d4af37;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1.5rem;
+    }
+
+    h3 {
+    font-size: 1.5rem;
+    color: #d4af37;
+    margin: 1.2rem 0 0.5rem;
+    }
+
+    p {
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+    }
+
+    /* ============================================================
+    HEADER – ESTRUTURA DE TRÊS COLUNAS (ESQUERDA, CENTRO, DIREITA)
+    ============================================================ */
+    .header {
+    background: #0a0a0a;
+    border-bottom: 2px solid #d4af37;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    }
+
+    .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* força uma única linha em desktop */
+    gap: 10px;
+    position: relative;
+    min-height: 70px;
+    }
+
+    /* Colunas laterais – não esticam, mantêm conteúdo justado */
+    .header__left,
+    .header__right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    }
+    .header__left {
+    justify-content: flex-start;
+    }
+    .header__right {
+    justify-content: flex-end;
+    gap: 12px;
+    }
+
+    /* Coluna central – escudo */
+    .header__center {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    }
+
+    /* ============================================================
+    LOGO (APENAS A IMAGEM, SEM TEXTO)
+    ============================================================ */
+    .logo a {
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+    }
+    .logo a:hover {
+    color: #d4af37;
+    }
+    .logo__img {
+    height: 200px; /* ajuste conforme a sua imagem */
+    width: auto;
+    display: block;
+    }
+
+    /* ============================================================
+    MENU – LINKS LADO A LADO, SEM QUEBRA
+    ============================================================ */
+    .nav {
+    display: flex;
+    }
+    .nav__list {
+    display: flex;
+    flex-wrap: nowrap; /* não quebra em telas grandes */
+    gap: 0.8rem 1.5rem; /* espaçamento vertical / horizontal */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    }
+
+    .nav__item {
+    position: relative;
+    white-space: nowrap; /* impede que o texto do link quebre */
+    }
+
+    .nav__link {
+    font-family: "Oswald", sans-serif;
+    font-size: 0.9rem; /* tamanho para caber todos na linha */
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #cccccc;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition:
+        color 0.3s,
+        border-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    }
+
+    .nav__link:hover,
+    .nav__link.active {
+    color: #d4af37;
+    border-bottom-color: #d4af37;
+    }
+
+    .nav__arrow {
+    font-size: 0.6rem;
+    transition: transform 0.3s;
+    }
+    .nav__item--has-dropdown:hover .nav__arrow {
+    transform: rotate(180deg);
+    }
+
+    /* ============================================================
+    DROPDOWN (SUB MENU)
+    ============================================================ */
+    .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #111111;
+    border: 1px solid #d4af37;
+    border-radius: 6px;
+    padding: 16px 20px;
+    min-width: 210px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+    .nav__item--has-dropdown:hover .dropdown {
+    display: flex;
+    }
+
+    .dropdown__group {
+    margin-bottom: 4px;
+    }
+    .dropdown__title {
+    font-family: "Oswald", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #d4af37;
+    text-transform: uppercase;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    }
+    .dropdown__group ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    }
+    .dropdown__group ul li a {
+    font-size: 0.9rem;
+    color: #dddddd;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: block;
+    transition:
+        background 0.3s,
+        color 0.3s;
+    }
+    .dropdown__group ul li a:hover {
+    background: #d4af37;
+    color: #000000;
+    }
+
+    /* ============================================================
+    BUSCA (À DIREITA)
+    ============================================================ */
+    .header__search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaaaaa;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    white-space: nowrap;
+    }
+    .header__search:hover {
+    color: #d4af37;
+    }
+    .search-label {
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+    HAMBURGUER (MOBILE)
+    ============================================================ */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 10;
+    }
+    .hamburger__bar {
+    width: 28px;
+    height: 3px;
+    background: #d4af37;
+    border-radius: 3px;
+    transition: 0.3s;
+    }
+
+    /* ============================================================
+    MAIN – ÁREA DE CONTEÚDO
+    ============================================================ */
+    .main {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    }
+
+    /* Página inicial (home) */
+    .page-home {
+    text-align: center;
+    padding: 50px 20px;
+    }
+    .page-home h1 {
+    font-size: 3.5rem;
+    }
+    .page-home .lead {
+    font-size: 1.3rem;
+    color: #cccccc;
+    max-width: 700px;
+    margin: 20px auto;
+    }
+
+    /* ============================================================
+    BREADCRUMB E BOTÃO VOLTAR
+    ============================================================ */
+    .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+    }
+
+    .breadcrumb {
+    font-size: 0.85rem;
+    color: #aaaaaa;
+    font-family: "Roboto", sans-serif;
+    }
+    .breadcrumb a {
+    color: #d4af37;
+    transition: color 0.3s;
+    }
+    .breadcrumb a:hover {
+    color: #ffffff;
+    }
+    .breadcrumb span {
+    color: #888888;
+    }
+
+    .btn-voltar {
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 6px 18px;
+    border-radius: 4px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition:
+        background 0.3s,
+        color 0.3s;
+    }
+    .btn-voltar:hover {
+    background: #d4af37;
+    color: #000000;
+    }
+
+    /* ============================================================
+    CARDS
+    ============================================================ */
+    .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+    }
+    .card {
+    background: #111111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    transition:
+        border-color 0.3s,
+        transform 0.2s;
+    }
+    .card:hover {
+    border-color: #d4af37;
+    transform: translateY(-4px);
+    }
+    .card h3 {
+    margin-top: 0;
+    }
+    .card p {
+    color: #bbbbbb;
+    }
+
+    /* ============================================================
+    TABELA DE JOGOS
+    ============================================================ */
+    .table-games {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    }
+    .table-games th,
+    .table-games td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
+    text-align: left;
+    }
+    .table-games th {
+    background: #1a1a1a;
+    color: #d4af37;
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    }
+    .table-games tr:hover td {
+    background: #0f0f0f;
+    }
+
+    /* ============================================================
+    FOOTER
+    ============================================================ */
+    .footer {
+    background: #0a0a0a;
+    border-top: 2px solid #d4af37;
+    padding: 20px 0;
+    margin-top: 30px;
+    }
+    .footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    }
+    .footer p {
+    margin: 0;
+    color: #888888;
+    font-size: 0.9rem;
+    }
+    .footer__social {
+    display: flex;
+    gap: 18px;
+    }
+    .footer__social a {
+    color: #aaaaaa;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+    }
+    .footer__social a:hover {
+    color: #d4af37;
+    }
+
+    /* ============================================================
+    RESPONSIVIDADE
+    ============================================================ */
+
+    /* Telas médias (até 992px) – reduz espaçamentos */
+    @media (max-width: 992px) {
+    .nav__list {
+        gap: 0.5rem 1rem;
+    }
+    .nav__link {
+        font-size: 0.8rem;
+    }
+    .logo__img {
+        height: 45px;
+    }
+    }
+
+    /* Tablets e celulares grandes (até 768px) – menu hambúrguer */
+    @media (max-width: 768px) {
+    .header__inner {
+        flex-wrap: wrap; /* permite quebra para o mobile */
+        justify-content: center;
+        min-height: 60px;
+    }
+
+    .header__left,
+    .header__right {
+        flex: 1 1 100%;
+        justify-content: center;
+        display: none; /* escondido por padrão */
+        order: 2;
+    }
+    .header__left.open,
+    .header__right.open {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        border-top: 1px solid #222;
+        padding-top: 10px;
+    }
+
+    .header__center {
+        flex: 1 1 100%;
+        order: 1;
+        justify-content: center;
+    }
+    .header__right {
+        order: 3;
+    }
+
+    .hamburger {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 12px;
+    }
+
+    .header__search {
+        display: none; /* opcional: esconde a busca no mobile */
+    }
+
+    .logo__img {
+        height: 40px;
+    }
+
+    /* Menu mobile: itens empilhados verticalmente */
+    .nav__list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem 0.8rem;
+    }
+    .nav__item {
+        white-space: normal;
+        width: auto;
+        text-align: center;
+        border-bottom: none;
+    }
+    .nav__link {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        border-bottom: none;
+        justify-content: center;
+        width: auto;
+    }
+    .nav__link.active {
+        border-bottom: none;
+        background: rgba(212, 175, 55, 0.1);
+    }
+
+    /* Dropdown em acordeão no mobile */
+    .dropdown {
+        display: none;
+        position: static;
+        background: #0d0d0d;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 8px 0 8px 20px;
+        width: 100%;
+    }
+    .nav__item--has-dropdown.open .dropdown {
+        display: flex;
+    }
+
+    /* Ajustes de conteúdo */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .btn-voltar {
+        align-self: flex-start;
+    }
+
+    .page-home h1 {
+        font-size: 2.5rem;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .footer__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    }
+
+    /* Celulares pequenos (até 480px) */
+    @media (max-width: 480px) {
+    .logo__img {
+        height: 35px;
+    }
+    .main {
+        padding: 20px 12px;
+    }
+    .nav__link {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+    .nav__list {
+        gap: 0.2rem 0.5rem;
+    }
+    }
+.header__search{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.header__search input{
+
+    width:180px;
+
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    border:2px solid #D4AF37;
+
+    background:#111;
+
+    color:white;
+
+}
+
+.header__search button{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#D4AF37;
+
+    cursor:pointer;
+
+}
