@@ -119,7 +119,7 @@
     width: 100%;
     max-width: 1440px; /* Alarga a área de trabalho para os menus não se espremerem */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 px;
 }
 /* ============================================================
    COLUNAS 
