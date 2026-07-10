@@ -3,11 +3,14 @@
 
   const main = document.getElementById("main");
   const hamburger = document.getElementById("hamburger");
+  const menuLeft = document.getElementById("menuLeft");
+  const menuRight = document.getElementById("menuRight");
+  
   const navLinks = document.querySelectorAll(
-    ".nav__link, .dropdown__group ul li a, #logo-link",
+    ".nav__link, .dropdown__group ul li a, #logo-link, #logo-link img"
   );
   const dropdownToggles = document.querySelectorAll(
-    ".nav__item--has-dropdown > .nav__link",
+    ".nav__item--has-dropdown > .nav__link"
   );
 
   // ===== Mapeamento para breadcrumb =====
@@ -31,7 +34,7 @@
     "proximos-jogos": { label: "PRÓXIMOS JOGOS", parent: "home" },
   };
 
-  // ===== CONTEÚDO DAS PÁGINAS (ALINHADO COM A HISTÓRIA REAL) =====
+  // ===== CONTEÚDO DAS PÁGINAS =====
   const contentMap = {
     home: `
             <div class="page-home">
@@ -80,8 +83,7 @@
     contatos: `
             <h2>Contatos</h2>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato
-(19) 99014-1082 e (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> (19) 99014-1082 e (19) 99608-3109</p>
             <p><i class="fas fa-map-marker-alt" style="color:#D4AF37; width:30px;"></i> <strong>Sede:</strong> Sem definição! Mococa – SP</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h</p>
         `,
@@ -95,7 +97,7 @@
     noticias: `
             <h2>Últimas Notícias</h2>
             <div class="card-grid">
-                <div class="card"><h3>Retorno do elenco em 2026</h3><p>Após hiato em 2024, o José Justi FC reestrutura sua gestão e planeja disputar competições oficiais.</p></div>
+                <div class="card"><h3>Retorno do elenco em 2026</h3><p>Após hiato in 2024, o José Justi FC reestrutura sua gestão e planeja disputar competições oficiais.</p></div>
             </div>
         `,
     "proximos-jogos": `
@@ -137,9 +139,9 @@
             <h2>Ingressos / Planos</h2>
             <p>Confira os valores e benefícios dos planos de sócio-torcedor do José Justi FC:</p>
             <ul style="list-style: disc; padding-left: 20px; color: #e0e0e0;">
-                <li><strong>Plano Ouro:</strong>Plano Indefinido.</li>
-                <li><strong>Plano Prata:</strong>Plano Indefinido.</li>
-                <li><strong>Plano Bronze:</strong>Plano Indefinido.</li>
+                <li><strong>Plano Ouro:</strong> Plano Indefinido.</li>
+                <li><strong>Plano Prata:</strong> Plano Indefinido.</li>
+                <li><strong>Plano Bronze:</strong> Plano Indefinido.</li>
             </ul>
         `,
     transparencia: `
@@ -163,7 +165,7 @@
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> Indefinido</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109</p>
-            <p>Disponibilizamos releases, entrevistas e materiais para veículos de comunicação.</p>
+            <p>Disponibilizamos releases, interviews e materiais para veículos de comunicação.</p>
         `,
   };
 
@@ -219,7 +221,7 @@
     window.location.hash = section;
     highlightActiveLink(section);
 
-    // Eventos do botão voltar
+    // Eventos dinâmicos do botão voltar interno da página
     const backBtnElement = main.querySelector(".btn-voltar");
     if (backBtnElement) {
       backBtnElement.addEventListener("click", function (e) {
@@ -228,179 +230,80 @@
           e.preventDefault();
           loadContent(parentSection);
           closeMobileMenu();
-          closeAllDropdowns();
         }
       });
     }
 
-    // Eventos dos links do breadcrumb
+    // Eventos dinâmicos do link do breadcrumb
     main.querySelectorAll(".breadcrumb a").forEach((link) => {
       link.addEventListener("click", function (e) {
-        const section = this.dataset.section;
-        if (section) {
+        const targetSection = this.dataset.section;
+        if (targetSection) {
           e.preventDefault();
-          loadContent(section);
+          loadContent(targetSection);
           closeMobileMenu();
-          closeAllDropdowns();
         }
       });
     });
   }
 
-  // ===== DESTAQUE DO LINK ATIVO =====
   function highlightActiveLink(section) {
-    document
-      .querySelectorAll(".nav__link, .dropdown__group ul li a")
-      .forEach((link) => link.classList.remove("active"));
-    if (!section || section === "home") return;
-    document
-      .querySelectorAll(".nav__link, .dropdown__group ul li a")
-      .forEach((link) => {
-        if (link.dataset.section === section) link.classList.add("active");
-      });
-  }
-
-  // ===== NAVEGAÇÃO =====
-  function navigate(e) {
-    const target = e.currentTarget;
-    const section = target.dataset.section;
-    if (target.id === "logo-link" || section === "home") {
-      e.preventDefault();
-      loadContent("home");
-      closeMobileMenu();
-      return;
-    }
-    if (section) {
-      e.preventDefault();
-      loadContent(section);
-      closeMobileMenu();
-      closeAllDropdowns();
-    }
-  }
-
-  // ===== MENU MOBILE =====
-  function toggleMobileMenu(e) {
-    e.stopPropagation();
-    const left = document.querySelector(".header__left");
-    const right = document.querySelector(".header__right");
-    left.classList.toggle("open");
-    right.classList.toggle("open");
-    if (left.classList.contains("open")) closeAllDropdowns();
-  }
-  function closeMobileMenu() {
-    document.querySelector(".header__left")?.classList.remove("open");
-    document.querySelector(".header__right")?.classList.remove("open");
-  }
-
-  // ===== DROPDOWN MOBILE =====
-  function toggleDropdown(e) {
-    const parent = e.currentTarget.closest(".nav__item--has-dropdown");
-    if (!parent) return;
-    e.preventDefault();
-    document
-      .querySelectorAll(".nav__item--has-dropdown.open")
-      .forEach((item) => {
-        if (item !== parent) item.classList.remove("open");
-      });
-    parent.classList.toggle("open");
-  }
-  function closeAllDropdowns() {
-    document
-      .querySelectorAll(".nav__item--has-dropdown.open")
-      .forEach((item) => item.classList.remove("open"));
-  }
-
-  // ===== INICIALIZAÇÃO =====
-  function pesquisar() {
-    const texto = searchInput.value.toLowerCase().trim();
-
-    const resultados = {
-      historia: "historia",
-      história: "historia",
-
-      titulo: "titulos",
-      títulos: "titulos",
-      titulos: "titulos",
-
-      identidade: "identidade",
-
-      diretoria: "diretoria",
-      presidente: "diretoria",
-
-      contato: "contato",
-      contatos: "contatos",
-
-      ouvidoria: "ouvidoria",
-
-      futebol: "futebol",
-
-      modalidades: "modalidades",
-
-      ingressos: "ingressos",
-      planos: "ingressos",
-
-      transparencia: "transparencia",
-      transparência: "transparencia",
-
-      negocios: "negocios",
-      negócios: "negocios",
-
-      imprensa: "imprensa",
-
-      noticias: "noticias",
-      notícias: "noticias",
-
-      jogos: "proximos-jogos",
-      próximos: "proximos-jogos",
-    };
-
-    for (let palavra in resultados) {
-      if (texto.includes(palavra)) {
-        loadContent(resultados[palavra]);
-
-        searchInput.value = "";
-
-        return;
-      }
-    }
-
-    alert("Nenhum resultado encontrado.");
-  }
-  function init() {
-    const hash = window.location.hash.replace("#", "");
-    loadContent(hash || "home");
-
-    navLinks.forEach((link) => link.addEventListener("click", navigate));
-    searchBtn.addEventListener("click", pesquisar);
-
-    searchInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        pesquisar();
+    document.querySelectorAll(".nav__link").forEach((link) => {
+      if (link.dataset.section === section) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
       }
     });
-    hamburger.addEventListener("click", toggleMobileMenu);
-    dropdownToggles.forEach((toggle) =>
-      toggle.addEventListener("click", toggleDropdown),
-    );
+  }
 
-    document.addEventListener("click", function (e) {
-      if (
-        !e.target.closest(".header") &&
-        (document.querySelector(".header__left.open") ||
-          document.querySelector(".header__right.open"))
-      ) {
+  // ===== CONTROLES DO MENU MOBILE =====
+  function toggleMobileMenu() {
+    hamburger.classList.toggle("open");
+    menuLeft.classList.toggle("open");
+    menuRight.classList.toggle("open");
+  }
+
+  function closeMobileMenu() {
+    hamburger.classList.remove("open");
+    menuLeft.classList.remove("open");
+    menuRight.classList.remove("open");
+    document.querySelectorAll(".nav__item--has-dropdown").forEach(item => {
+        item.classList.remove("open");
+    });
+  }
+
+  hamburger.addEventListener("click", toggleMobileMenu);
+
+  // Controle de clique nos Dropdowns em telas Mobile
+  dropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", function (e) {
+      if (window.innerWidth <= 1024) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle("open");
+      }
+    });
+  });
+
+  // Vinculação de eventos para cliques em todos os links mapeados
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      let targetElement = this;
+      if (this.tagName === "IMG") {
+         targetElement = this.closest("a");
+      }
+      const section = targetElement.dataset.section;
+      if (section && section !== "#") {
+        e.preventDefault();
+        loadContent(section);
         closeMobileMenu();
       }
     });
+  });
 
-    window.addEventListener("hashchange", function () {
-      const newHash = window.location.hash.replace("#", "");
-      if (contentMap[newHash]) loadContent(newHash);
-      else loadContent("home");
-    });
-  }
+  // Inicialização por Hash da URL
+  const initialSection = window.location.hash.substring(1);
+  loadContent(initialSection || "home");
 
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", init);
-  else init();
 })();
