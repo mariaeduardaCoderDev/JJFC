@@ -75,7 +75,6 @@
 /* ============================================================
    HEADER (Garante o espaço correto e o contexto de posicionamento)
 ============================================================ */
-============================================================ */
 .header {
     background: #0a0a0a;
     border-bottom: 2px solid #d4af37;
@@ -88,11 +87,12 @@
 }
 
 .header__inner {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    /* Coluna esquerda ocupa o espaço que der, centro fixo em 150px, coluna direita o resto */
+    grid-template-columns: 1fr 150px 1fr; 
     align-items: center;
     width: 100%;
-    max-width: 1340px; /* Aumentado ligeiramente para dar mais fôlego aos textos */
+    max-width: 1400px; /* Aumentado para 1400px para o menu da direita caber folgado */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -138,26 +138,25 @@
    COLUNAS 
    ============================================================ */
 .header__left {
-    flex: 1 1 33.333%; /* Ocupa exatamente 1/3 do cabeçalho */
     display: flex;
     justify-content: flex-start; 
     align-items: center;
+    padding-right: 20px; /* Espaço de segurança para não colidir com o escudo */
 }
 
 .header__center {
-    flex: 0 0 auto; /* Ocupa apenas o espaço real do escudo */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 30px; /* Margem idêntica e fixa dos dois lados do escudo */
+    z-index: 10;
 }
 
 .header__right {
-    flex: 1 1 33.333%; /* Ocupa exatamente 1/3 do cabeçalho */
     display: flex;
     justify-content: flex-end;   
     align-items: center;
     gap: 15px;
+    padding-left: 20px; /* Espaço de segurança para não colidir com o escudo */
 }
 /* ============================================================
    LOGO
@@ -175,7 +174,7 @@
 }
 
 .logo__img {
-    height: 110px; /* Altura ideal para não estourar o fundo preto */
+    height: 110px; /* Altura ideal que mantém o escudo imponente sem estourar */
     width: auto;
     border-radius: 50%;
     object-fit: contain;
@@ -186,7 +185,6 @@
 .logo__img:hover {
     transform: scale(1.05);
 }
-
 /* ============================================================
    MENUS
 ============================================================ */
