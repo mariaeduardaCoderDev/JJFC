@@ -5,10 +5,10 @@
   const main = document.getElementById("main");
   const hamburger = document.getElementById("hamburger");
   const navLinks = document.querySelectorAll(
-    ".nav__link, .dropdown__group ul li a, #logo-link, .header__link"
+    ".nav__link, .dropdown__group ul li a, #logo-link, .header__link",
   );
   const dropdownToggles = document.querySelectorAll(
-    ".nav__item--has-dropdown > .nav__link"
+    ".nav__item--has-dropdown > .nav__link",
   );
 
   // Mapeando os elementos da busca pelas classes do CSS para fazer funcionar
@@ -85,7 +85,8 @@
     contatos: `
             <h2>Contatos</h2>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato (19) 99014-1082 (Valdir Junior)e (19) 99608-3109 (Maria Eduarda)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082 (Valdir Junior)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109 (Maria Eduarda)</p>            
             <p><i class="fas fa-map-marker-alt" style="color:#D4AF37; width:30px;"></i> <strong>Sede:</strong> Sem definição! Mococa – SP</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h</p>
         `,
@@ -93,7 +94,8 @@
             <h2>Ouvidoria</h2>
             <p>Canal exclusivo para reclamações, sugestões e elogios. Sua opinião é fundamental para melhorarmos cada dia mais.</p>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> (19) 99014-1082 (Valdir Junior)e (19) 99608-3109 (Maria Eduarda)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082 (Valdir Junior)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109 (Maria Eduarda)</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Atendimento:</strong> Segunda a sexta, 10h às 17h</p>
         `,
     noticias: `
@@ -319,7 +321,7 @@
   // ===== INICIALIZAÇÃO =====
   function pesquisar() {
     if (!searchInput) return;
-    
+
     const texto = searchInput.value.toLowerCase().trim();
 
     const resultados = {
@@ -378,7 +380,7 @@
     loadContent(hash || "home");
 
     navLinks.forEach((link) => link.addEventListener("click", navigate));
-    
+
     // Vincula os eventos apenas se os seletores da busca existirem no DOM
     if (searchBtn && searchInput) {
       searchBtn.addEventListener("click", pesquisar);
@@ -392,9 +394,9 @@
     if (hamburger) {
       hamburger.addEventListener("click", toggleMobileMenu);
     }
-    
+
     dropdownToggles.forEach((toggle) =>
-      toggle.addEventListener("click", toggleDropdown)
+      toggle.addEventListener("click", toggleDropdown),
     );
 
     document.addEventListener("click", function (e) {
