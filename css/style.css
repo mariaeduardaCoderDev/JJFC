@@ -85,18 +85,17 @@
     min-height: 130px;
 }
 
-.header__inner{
-    display:grid;
-    grid-template-columns: 520px 120px 520px;
-    justify-content:center;
-    align-items:center;
-
-    max-width:1200px;
-    margin:0 auto;
-    min-height:120px;
-
-    column-gap:25px;
+.header__inner {
+    display: grid;
+    grid-template-columns: 500px 160px 500px;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 120px;
+    column-gap: 25px;
 }
+
 /* ============================================================
    COLUNAS
 ============================================================ */
@@ -130,19 +129,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%; 
 }
 
 .logo a {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .logo__img {
-    height: 125px;
+    height: 110px; 
     width: auto;
     display: block;
     object-fit: contain;
+    vertical-align: middle; 
     transition: transform .3s ease;
 }
 
