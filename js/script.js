@@ -160,7 +160,7 @@
     imprensa: `
             <h2>Imprensa</h2>
             <p>Assessoria de imprensa do José Justi FC:</p>
-            <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> imprensa@josejustifc.com.br</p>
+            <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> Indefinido</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109</p>
             <p>Disponibilizamos releases, entrevistas e materiais para veículos de comunicação.</p>
