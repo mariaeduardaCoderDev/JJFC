@@ -1,17 +1,19 @@
 (function () {
   "use strict";
 
+  // ===== ELEMENTOS DO DOM =====
   const main = document.getElementById("main");
   const hamburger = document.getElementById("hamburger");
-  const menuLeft = document.getElementById("menuLeft");
-  const menuRight = document.getElementById("menuRight");
-  
   const navLinks = document.querySelectorAll(
-    ".nav__link, .dropdown__group ul li a, #logo-link, #logo-link img"
+    ".nav__link, .dropdown__group ul li a, #logo-link, .header__link"
   );
   const dropdownToggles = document.querySelectorAll(
     ".nav__item--has-dropdown > .nav__link"
   );
+
+  // Mapeando os elementos da busca pelas classes do CSS para fazer funcionar
+  const searchInput = document.querySelector(".search__input");
+  const searchBtn = document.querySelector(".search__btn");
 
   // ===== Mapeamento para breadcrumb =====
   const sectionInfo = {
@@ -34,7 +36,7 @@
     "proximos-jogos": { label: "PRÓXIMOS JOGOS", parent: "home" },
   };
 
-  // ===== CONTEÚDO DAS PÁGINAS =====
+  // ===== CONTEÚDO DAS PÁGINAS (ALINHADO COM A HISTÓRIA REAL) =====
   const contentMap = {
     home: `
             <div class="page-home">
@@ -83,7 +85,7 @@
     contatos: `
             <h2>Contatos</h2>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> (19) 99014-1082 e (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato (19) 99014-1082 e (19) 99608-3109</p>
             <p><i class="fas fa-map-marker-alt" style="color:#D4AF37; width:30px;"></i> <strong>Sede:</strong> Sem definição! Mococa – SP</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h</p>
         `,
@@ -97,7 +99,7 @@
     noticias: `
             <h2>Últimas Notícias</h2>
             <div class="card-grid">
-                <div class="card"><h3>Retorno do elenco em 2026</h3><p>Após hiato in 2024, o José Justi FC reestrutura sua gestão e planeja disputar competições oficiais.</p></div>
+                <div class="card"><h3>Retorno do elenco em 2026</h3><p>Após hiato em 2024, o José Justi FC reestrutura sua gestão e planeja disputar competições oficiais.</p></div>
             </div>
         `,
     "proximos-jogos": `
@@ -221,7 +223,7 @@
     window.location.hash = section;
     highlightActiveLink(section);
 
-    // Eventos dinâmicos do botão voltar interno da página
+    // Eventos do botão voltar
     const backBtnElement = main.querySelector(".btn-voltar");
     if (backBtnElement) {
       backBtnElement.addEventListener("click", function (e) {
@@ -230,80 +232,187 @@
           e.preventDefault();
           loadContent(parentSection);
           closeMobileMenu();
+          closeAllDropdowns();
         }
       });
     }
 
-    // Eventos dinâmicos do link do breadcrumb
+    // Eventos dos links do breadcrumb
     main.querySelectorAll(".breadcrumb a").forEach((link) => {
       link.addEventListener("click", function (e) {
-        const targetSection = this.dataset.section;
-        if (targetSection) {
+        const section = this.dataset.section;
+        if (section) {
           e.preventDefault();
-          loadContent(targetSection);
+          loadContent(section);
           closeMobileMenu();
+          closeAllDropdowns();
         }
       });
     });
   }
 
+  // ===== DESTAQUE DO LINK ATIVO =====
   function highlightActiveLink(section) {
-    document.querySelectorAll(".nav__link").forEach((link) => {
-      if (link.dataset.section === section) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    });
+    document
+      .querySelectorAll(".nav__link, .dropdown__group ul li a, .header__link")
+      .forEach((link) => link.classList.remove("active"));
+    if (!section || section === "home") return;
+    document
+      .querySelectorAll(".nav__link, .dropdown__group ul li a, .header__link")
+      .forEach((link) => {
+        if (link.dataset.section === section) link.classList.add("active");
+      });
   }
 
-  // ===== CONTROLES DO MENU MOBILE =====
-  function toggleMobileMenu() {
-    hamburger.classList.toggle("open");
-    menuLeft.classList.toggle("open");
-    menuRight.classList.toggle("open");
+  // ===== NAVEGAÇÃO =====
+  function navigate(e) {
+    const target = e.currentTarget;
+    const section = target.dataset.section;
+    if (target.id === "logo-link" || section === "home") {
+      e.preventDefault();
+      loadContent("home");
+      closeMobileMenu();
+      return;
+    }
+    if (section) {
+      e.preventDefault();
+      loadContent(section);
+      closeMobileMenu();
+      closeAllDropdowns();
+    }
   }
 
+  // ===== MENU MOBILE =====
+  function toggleMobileMenu(e) {
+    e.stopPropagation();
+    const left = document.querySelector(".header__left");
+    const right = document.querySelector(".header__right");
+    left.classList.toggle("open");
+    right.classList.toggle("open");
+    if (left.classList.contains("open")) closeAllDropdowns();
+  }
   function closeMobileMenu() {
-    hamburger.classList.remove("open");
-    menuLeft.classList.remove("open");
-    menuRight.classList.remove("open");
-    document.querySelectorAll(".nav__item--has-dropdown").forEach(item => {
-        item.classList.remove("open");
-    });
+    document.querySelector(".header__left")?.classList.remove("open");
+    document.querySelector(".header__right")?.classList.remove("open");
   }
 
-  hamburger.addEventListener("click", toggleMobileMenu);
+  // ===== DROPDOWN MOBILE =====
+  function toggleDropdown(e) {
+    const parent = e.currentTarget.closest(".nav__item--has-dropdown");
+    if (!parent) return;
+    e.preventDefault();
+    document
+      .querySelectorAll(".nav__item--has-dropdown.open")
+      .forEach((item) => {
+        if (item !== parent) item.classList.remove("open");
+      });
+    parent.classList.toggle("open");
+  }
+  function closeAllDropdowns() {
+    document
+      .querySelectorAll(".nav__item--has-dropdown.open")
+      .forEach((item) => item.classList.remove("open"));
+  }
 
-  // Controle de clique nos Dropdowns em telas Mobile
-  dropdownToggles.forEach((toggle) => {
-    toggle.addEventListener("click", function (e) {
-      if (window.innerWidth <= 1024) {
-        e.preventDefault();
-        const parent = this.parentElement;
-        parent.classList.toggle("open");
-      }
-    });
-  });
+  // ===== INICIALIZAÇÃO =====
+  function pesquisar() {
+    if (!searchInput) return;
+    
+    const texto = searchInput.value.toLowerCase().trim();
 
-  // Vinculação de eventos para cliques em todos os links mapeados
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      let targetElement = this;
-      if (this.tagName === "IMG") {
-         targetElement = this.closest("a");
+    const resultados = {
+      historia: "historia",
+      história: "historia",
+
+      titulo: "titulos",
+      títulos: "titulos",
+      titulos: "titulos",
+
+      identidade: "identidade",
+
+      diretoria: "diretoria",
+      presidente: "diretoria",
+
+      contato: "contato",
+      contatos: "contatos",
+
+      ouvidoria: "ouvidoria",
+
+      futebol: "futebol",
+
+      modalidades: "modalidades",
+
+      ingressos: "ingressos",
+      planos: "ingressos",
+
+      transparencia: "transparencia",
+      transparência: "transparencia",
+
+      negocios: "negocios",
+      negócios: "negocios",
+
+      imprensa: "imprensa",
+
+      noticias: "noticias",
+      notícias: "noticias",
+
+      jogos: "proximos-jogos",
+      próximos: "proximos-jogos",
+    };
+
+    for (let palavra in resultados) {
+      if (texto.includes(palavra)) {
+        loadContent(resultados[palavra]);
+        searchInput.value = "";
+        return;
       }
-      const section = targetElement.dataset.section;
-      if (section && section !== "#") {
-        e.preventDefault();
-        loadContent(section);
+    }
+
+    alert("Nenhum resultado encontrado.");
+  }
+
+  function init() {
+    const hash = window.location.hash.replace("#", "");
+    loadContent(hash || "home");
+
+    navLinks.forEach((link) => link.addEventListener("click", navigate));
+    
+    // Vincula os eventos apenas se os seletores da busca existirem no DOM
+    if (searchBtn && searchInput) {
+      searchBtn.addEventListener("click", pesquisar);
+      searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          pesquisar();
+        }
+      });
+    }
+
+    if (hamburger) {
+      hamburger.addEventListener("click", toggleMobileMenu);
+    }
+    
+    dropdownToggles.forEach((toggle) =>
+      toggle.addEventListener("click", toggleDropdown)
+    );
+
+    document.addEventListener("click", function (e) {
+      if (
+        !e.target.closest(".header") &&
+        (document.querySelector(".header__left.open") ||
+          document.querySelector(".header__right.open"))
+      ) {
         closeMobileMenu();
       }
     });
-  });
 
-  // Inicialização por Hash da URL
-  const initialSection = window.location.hash.substring(1);
-  loadContent(initialSection || "home");
+    window.addEventListener("hashchange", function () {
+      const newHash = window.location.hash.replace("#", "");
+      if (contentMap[newHash]) loadContent(newHash);
+      else loadContent("home");
+    });
+  }
 
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", init);
+  else init();
 })();
