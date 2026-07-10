@@ -144,8 +144,8 @@
 }
 
 .logo__img {
-    height: 95px;
-    width: 95px;
+    height: 150px;
+    width: auto;
     border-radius: 50%;
     object-fit: contain;
     display: block;
