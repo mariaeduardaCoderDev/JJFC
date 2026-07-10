@@ -96,7 +96,6 @@
     padding: 0 20px;
     position: relative; /* ESSENCIAL: Serve de ponto de referência para o centro absoluto */
 }
-
 /* ============================================================
    COLUNAS (Distâncias simétricas e proteção contra quebras)
    ============================================================ */
@@ -196,7 +195,6 @@
 .logo__img:hover {
     transform: scale(1.05);
 }
-
 /* ============================================================
    MENUS
 ============================================================ */
