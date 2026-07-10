@@ -88,46 +88,24 @@
 
 .header__inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Empurra o Menu 1 para a extrema esquerda e o Menu 2 para a extrema direita */
     align-items: center;
     width: 100%;
-    /* Mantém o alinhamento com o resto do site, mas garante o contexto de posição */
-    position: relative; 
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative; /* ESSENCIAL: Serve de ponto de referência para o centro absoluto */
 }
 
 /* ============================================================
    COLUNAS (Distâncias simétricas e proteção contra quebras)
    ============================================================ */
-.header {
-    background: #0a0a0a;
-    border-bottom: 2px solid #d4af37;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    height: 130px; /* Altura fixa para alinhar tudo perfeitamente na linha do horizonte */
-    display: flex;
-    align-items: center;
-}
-
-.header__inner {
-    display: grid !important; /* Força o comportamento grid mesmo com a classe .container injetada */
-    /* Divide em: Esquerda Flexível | Centro Fixo Proporcional | Direita Flexível */
-    grid-template-columns: 1fr 180px 1fr; 
-    align-items: center;
-    width: 100%;
-    max-width: 1440px; /* Alarga a área de trabalho para os menus não se espremerem */
-    margin: 0 auto;
-    padding: 0 px;
-}
-/* ============================================================
-   COLUNAS 
-   ============================================================ */
 .header__left {
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    flex: 1;
-    /* Reserva espaço para o menu não bater no escudo central */
+    /* Adiciona uma margem interna para o texto não encostar no escudo se a tela encolher */
+    padding-right: 80px; 
 }
 
 .header__center {
@@ -139,6 +117,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none; /* Garante que a área invisível do bloco não bloqueie cliques nos links */
+}
+
+.header__center * {
+    pointer-events: auto; /* Devolve os cliques apenas para o logo em si */
 }
 
 .header__right {
@@ -146,9 +129,45 @@
     justify-content: flex-end;   
     align-items: center;
     gap: 15px;
-    flex: 1;
-    /* Reserva espaço simétrico para o menu direito não invadir o escudo */
-    max-width: calc(50% - 90px); 
+    /* Adiciona a mesma margem interna idêntica ao lado esquerdo para manter a simetria visual */
+    padding-left: 80px; 
+}
+
+
+/* ============================================================
+   COLUNAS 
+   ============================================================ */
+.header__left {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    /* Adiciona uma margem interna para o texto não encostar no escudo se a tela encolher */
+    padding-right: 80px; 
+}
+
+.header__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Garante que a área invisível do bloco não bloqueie cliques nos links */
+}
+
+.header__center * {
+    pointer-events: auto; /* Devolve os cliques apenas para o logo em si */
+}
+
+.header__right {
+    display: flex;
+    justify-content: flex-end;   
+    align-items: center;
+    gap: 15px;
+    /* Adiciona a mesma margem interna idêntica ao lado esquerdo para manter a simetria visual */
+    padding-left: 80px; 
 }
 /* ============================================================
    LOGO
@@ -166,7 +185,7 @@
 }
 
 .logo__img {
-    height: 120px; /* Tamanho proporcional para preencher o header sem estourar */
+    height: 110px; /* Reduzido de 150px para não estourar a altura de 130px do cabeçalho */
     width: auto;
     border-radius: 50%;
     object-fit: contain;
@@ -177,8 +196,6 @@
 .logo__img:hover {
     transform: scale(1.05);
 }
-
-
 
 /* ============================================================
    MENUS
