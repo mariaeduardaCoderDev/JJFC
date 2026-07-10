@@ -12,8 +12,8 @@
   );
 
   // Mapeando os elementos da busca pelas classes do CSS para fazer funcionar
-  const searchInput = document.querySelector(".search__input");
-  const searchBtn = document.querySelector(".search__btn");
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 
   // ===== Mapeamento para breadcrumb =====
   const sectionInfo = {
@@ -315,61 +315,78 @@
   }
 
   // ===== INICIALIZAÇÃO =====
-  function pesquisar() {
+function pesquisar() {
+
     if (!searchInput) return;
-    
-    const texto = searchInput.value.toLowerCase().trim();
 
-    const resultados = {
-      historia: "historia",
-      história: "historia",
+    const texto = searchInput.value
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 
-      titulo: "titulos",
-      títulos: "titulos",
-      titulos: "titulos",
+    if (texto === "") return;
 
-      identidade: "identidade",
+    // Procura em TODO o conteúdo do site
+    for (const pagina in contentMap) {
 
-      diretoria: "diretoria",
-      presidente: "diretoria",
+        const conteudo = contentMap[pagina]
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
 
-      contato: "contato",
-      contatos: "contatos",
+        if (
+            conteudo.includes(texto) ||
+            pagina.includes(texto)
+        ) {
+            loadContent(pagina);
+            searchInput.value = "";
+            return;
+        }
+    }
 
-      ouvidoria: "ouvidoria",
-
-      futebol: "futebol",
-
-      modalidades: "modalidades",
-
-      ingressos: "ingressos",
-      planos: "ingressos",
-
-      transparencia: "transparencia",
-      transparência: "transparencia",
-
-      negocios: "negocios",
-      negócios: "negocios",
-
-      imprensa: "imprensa",
-
-      noticias: "noticias",
-      notícias: "noticias",
-
-      jogos: "proximos-jogos",
-      próximos: "proximos-jogos",
+    // Palavras-chave
+    const atalhos = {
+        clube: "clube",
+        historia: "historia",
+        titulos: "titulos",
+        identidade: "identidade",
+        diretoria: "diretoria",
+        presidente: "diretoria",
+        vice: "diretoria",
+        contato: "contato",
+        contatos: "contatos",
+        telefone: "contatos",
+        email: "contatos",
+        ouvidoria: "ouvidoria",
+        futebol: "futebol",
+        futsal: "modalidades",
+        modalidades: "modalidades",
+        ingresso: "ingressos",
+        ingressos: "ingressos",
+        plano: "ingressos",
+        planos: "ingressos",
+        transparencia: "transparencia",
+        negocios: "negocios",
+        patrocinio: "negocios",
+        imprensa: "imprensa",
+        noticia: "noticias",
+        noticias: "noticias",
+        jogo: "proximos-jogos",
+        jogos: "proximos-jogos",
+        proximo: "proximos-jogos"
     };
 
-    for (let palavra in resultados) {
-      if (texto.includes(palavra)) {
-        loadContent(resultados[palavra]);
-        searchInput.value = "";
-        return;
-      }
+    for (const palavra in atalhos) {
+        if (texto.includes(palavra)) {
+            loadContent(atalhos[palavra]);
+            searchInput.value = "";
+            return;
+        }
     }
 
     alert("Nenhum resultado encontrado.");
-  }
+}
 
   function init() {
     const hash = window.location.hash.replace("#", "");
