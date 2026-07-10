@@ -160,6 +160,8 @@
             <h2>Negócios</h2>
             <p>O José Justi FC está aberto a parcerias, patrocínios e oportunidades comerciais. Entre em contato com nosso departamento de marketing para propostas.</p>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> Indefinido</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082 (Valdir Junior)</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109 (Maria Eduarda)</p>
         `,
     imprensa: `
             <h2>Imprensa</h2>
