@@ -17,121 +17,49 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="container header__inner">
-        <div class="header__left" id="menuLeft">
-          <nav class="nav nav-left">
-            <ul class="nav__list">
-              <li class="nav__item nav__item--has-dropdown">
-                <a href="#" class="nav__link" data-section="clube"
-                  >CLUBE <i class="fas fa-chevron-down nav__arrow"></i
-                ></a>
-                <ul class="dropdown">
-                  <li class="dropdown__group">
-                    <span class="dropdown__title">Sobre o clube</span>
-                    <ul>
-                      <li><a href="#" data-section="historia">História</a></li>
-                      <li><a href="#" data-section="titulos">Títulos</a></li>
-                      <li>
-                        <a href="#" data-section="identidade">Identidade</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="dropdown__group">
-                    <span class="dropdown__title">Organograma</span>
-                    <ul>
-                      <li>
-                        <a href="#" data-section="diretoria"
-                          >Presidência e Diretoria</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="dropdown__group">
-                    <span class="dropdown__title">Fale conosco</span>
-                    <ul>
-                      <li><a href="#" data-section="contatos">Contatos</a></li>
-                      <li>
-                        <a href="#" data-section="ouvidoria">Ouvidoria</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="futebol">FUTEBOL</a>
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="modalidades"
-                  >MODALIDADES</a
-                >
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="ingressos"
-                  >INGRESSOS/PLANOS</a
-                >
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="contato">CONTATO</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+  <header class="header">
+  <div class="header__top">
+    <div class="header__top-container">
+      <a href="#transparencia" class="header__link">Transparência</a>
+      <a href="#negocios" class="header__link">Negócios</a>
+      <a href="#imprensa" class="header__link">Imprensa</a>
+    </div>
+  </div>
 
-        <div class="header__center">
-          <div class="logo">
-            <a href="#" id="logo-link" data-section="home">
-              <img src="jose-justi.png" alt="José Justi FC" class="logo__img" />
-            </a>
-          </div>
+  <div class="header__main">
+    <div class="header__main-container">
+      
+      <nav class="header__nav">
+        <div class="header__dropdown">
+          <a href="#clube" class="header__link">Clube <i class="fas fa-chevron-down"></i></a>
         </div>
+        <a href="#futebol" class="header__link">Futebol</a>
+        <a href="#modalidades" class="header__link">Modalidades</a>
+        <a href="#ingressos" class="header__link">Ingressos/Planos</a>
+      </nav>
 
-        <div class="header__right" id="menuRight">
-          <nav class="nav nav-right">
-            <ul class="nav__list">
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="transparencia"
-                  >TRANSPARÊNCIA</a
-                >
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="negocios"
-                  >NEGÓCIOS</a
-                >
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="imprensa"
-                  >IMPRENSA</a
-                >
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="noticias"
-                  >NOTÍCIAS</a
-                >
-              </li>
-              <li class="nav__item">
-                <a href="#" class="nav__link" data-section="proximos-jogos"
-                  >PRÓXIMOS JOGOS</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <div class="header__search">
-            <input type="text" id="searchInput" placeholder="Buscar..." />
-            <button id="searchBtn">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-          <span class="hamburger__bar"></span>
-          <span class="hamburger__bar"></span>
-          <span class="hamburger__bar"></span>
-        </button>
+      <div class="header__logo-container">
+        <a href="#home">
+          <img src="sua-logo.png" alt="José Justi FC" class="header__logo">
+        </a>
       </div>
-    </header>
 
+      <div class="header__right">
+        <nav class="header__nav">
+          <a href="#noticias" class="header__link">Notícias</a>
+          <a href="#jogos" class="header__link">Próximos Jogos</a>
+          <a href="#contato" class="header__link">Contato</a>
+        </nav>
+        
+        <div class="header__search">
+          <input type="text" placeholder="Buscar..." class="search__input">
+          <button class="search__btn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
     <main class="main" id="main"></main>
 
     <footer class="footer">
