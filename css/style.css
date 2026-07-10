@@ -102,16 +102,16 @@
 ============================================================ */
 .header__left {
     display: flex;
-    justify-content: flex-start; /* Alinha o menu da esquerda na ponta extrema */
+    justify-content: flex-start; /* Alinha o menu grudado na ponta esquerda */
     align-items: center;
-    flex-basis: 45%;             /* Garante metade do espaço livre para o lado esquerdo */
+    flex: 1;                     /* Ocupa espaço igual ao lado direito */
 }
 
 .header__center {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Fixa o logo no centro matemático exato */
+    transform: translate(-50%, -50%); /* Garante o logo cravado no centro do monitor */
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -120,10 +120,10 @@
 
 .header__right {
     display: flex;
-    justify-content: flex-end;   /* Alinha a barra de busca e o menu na ponta extrema direita */
+    justify-content: flex-end;  /* Alinha os itens grudados na ponta direita */
     align-items: center;
-    flex-basis: 45%;             /* Garante metade do espaço livre para o lado direito */
-    gap: 25px;                   /* Distância confortável entre os links e a busca */
+    flex: 1;                     /* Ocupa espaço igual ao lado esquerdo */
+    gap: 20px;
 }
 /* ============================================================
    LOGO
@@ -165,12 +165,16 @@
 .nav__list {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 20px;                   /* Espaçamento uniforme entre os links */
 }
 
-.header__left .nav__list{
-    justify-content: flex-end;
-    gap: 30px;
+/* Removemos o 'flex-end' antigo que estava jogando o menu esquerdo para o centro */
+.header__left .nav__list {
+    justify-content: flex-start; 
+}
+
+.header__right .nav__list {
+    justify-content: flex-start;
 }
 
 .header__right .nav__list {
