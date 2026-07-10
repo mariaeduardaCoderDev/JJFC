@@ -1,14 +1,19 @@
 (function () {
   "use strict";
 
+  // ===== ELEMENTOS DO DOM =====
   const main = document.getElementById("main");
   const hamburger = document.getElementById("hamburger");
   const navLinks = document.querySelectorAll(
-    ".nav__link, .dropdown__group ul li a, #logo-link",
+    ".nav__link, .dropdown__group ul li a, #logo-link, .header__link"
   );
   const dropdownToggles = document.querySelectorAll(
-    ".nav__item--has-dropdown > .nav__link",
+    ".nav__item--has-dropdown > .nav__link"
   );
+
+  // Mapeando os elementos da busca pelas classes do CSS para fazer funcionar
+  const searchInput = document.querySelector(".search__input");
+  const searchBtn = document.querySelector(".search__btn");
 
   // ===== Mapeamento para breadcrumb =====
   const sectionInfo = {
@@ -80,8 +85,7 @@
     contatos: `
             <h2>Contatos</h2>
             <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
-            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato
-(19) 99014-1082 e (19) 99608-3109</p>
+            <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> Telefones para contato (19) 99014-1082 e (19) 99608-3109</p>
             <p><i class="fas fa-map-marker-alt" style="color:#D4AF37; width:30px;"></i> <strong>Sede:</strong> Sem definição! Mococa – SP</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h</p>
         `,
@@ -137,9 +141,9 @@
             <h2>Ingressos / Planos</h2>
             <p>Confira os valores e benefícios dos planos de sócio-torcedor do José Justi FC:</p>
             <ul style="list-style: disc; padding-left: 20px; color: #e0e0e0;">
-                <li><strong>Plano Ouro:</strong>Plano Indefinido.</li>
-                <li><strong>Plano Prata:</strong>Plano Indefinido.</li>
-                <li><strong>Plano Bronze:</strong>Plano Indefinido.</li>
+                <li><strong>Plano Ouro:</strong> Plano Indefinido.</li>
+                <li><strong>Plano Prata:</strong> Plano Indefinido.</li>
+                <li><strong>Plano Bronze:</strong> Plano Indefinido.</li>
             </ul>
         `,
     transparencia: `
@@ -160,10 +164,10 @@
     imprensa: `
             <h2>Imprensa</h2>
             <p>Assessoria de imprensa do José Justi FC:</p>
-            <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> imprensa@josejustifc.com.br</p>
+            <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> Indefinido</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99014-1082</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> (19) 99608-3109</p>
-            <p>Disponibilizamos releases, entrevistas e materiais para veículos de comunicação.</p>
+            <p>Disponibilizamos releases, interviews e materiais para veículos de comunicação.</p>
         `,
   };
 
@@ -250,11 +254,11 @@
   // ===== DESTAQUE DO LINK ATIVO =====
   function highlightActiveLink(section) {
     document
-      .querySelectorAll(".nav__link, .dropdown__group ul li a")
+      .querySelectorAll(".nav__link, .dropdown__group ul li a, .header__link")
       .forEach((link) => link.classList.remove("active"));
     if (!section || section === "home") return;
     document
-      .querySelectorAll(".nav__link, .dropdown__group ul li a")
+      .querySelectorAll(".nav__link, .dropdown__group ul li a, .header__link")
       .forEach((link) => {
         if (link.dataset.section === section) link.classList.add("active");
       });
@@ -312,6 +316,8 @@
 
   // ===== INICIALIZAÇÃO =====
   function pesquisar() {
+    if (!searchInput) return;
+    
     const texto = searchInput.value.toLowerCase().trim();
 
     const resultados = {
@@ -357,30 +363,36 @@
     for (let palavra in resultados) {
       if (texto.includes(palavra)) {
         loadContent(resultados[palavra]);
-
         searchInput.value = "";
-
         return;
       }
     }
 
     alert("Nenhum resultado encontrado.");
   }
+
   function init() {
     const hash = window.location.hash.replace("#", "");
     loadContent(hash || "home");
 
     navLinks.forEach((link) => link.addEventListener("click", navigate));
-    searchBtn.addEventListener("click", pesquisar);
+    
+    // Vincula os eventos apenas se os seletores da busca existirem no DOM
+    if (searchBtn && searchInput) {
+      searchBtn.addEventListener("click", pesquisar);
+      searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          pesquisar();
+        }
+      });
+    }
 
-    searchInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        pesquisar();
-      }
-    });
-    hamburger.addEventListener("click", toggleMobileMenu);
+    if (hamburger) {
+      hamburger.addEventListener("click", toggleMobileMenu);
+    }
+    
     dropdownToggles.forEach((toggle) =>
-      toggle.addEventListener("click", toggleDropdown),
+      toggle.addEventListener("click", toggleDropdown)
     );
 
     document.addEventListener("click", function (e) {
