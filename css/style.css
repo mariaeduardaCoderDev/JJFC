@@ -110,12 +110,14 @@
     }
 
     /* Coluna central – escudo */
-    .header__center {
-    flex: 0 0 auto;
+  .header__center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    }
-
+    align-items: center;
+}
     /* ============================================================
     LOGO (APENAS A IMAGEM, SEM TEXTO)
     ============================================================ */
