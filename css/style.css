@@ -72,10 +72,9 @@
     color: #e0e0e0;
     }
 
-  /* ============================================================
-   HEADER
+/* ============================================================
+   HEADER (Garante o espaço correto e o contexto de posicionamento)
 ============================================================ */
-
 .header {
     background: #0a0a0a;
     border-bottom: 2px solid #d4af37;
@@ -83,42 +82,49 @@
     top: 0;
     z-index: 1000;
     min-height: 130px;
+    display: flex;
+    align-items: center;
 }
 
 .header__inner {
-    display: grid;
-    grid-template-columns: 500px 160px 500px;
-    justify-content: center;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1240px;
     margin: 0 auto;
-    min-height: 120px;
-    column-gap: 25px;
+    padding: 0 20px;
+    position: relative; /* CRÍTICO: Cria a referência para o centro absoluto */
 }
 
 /* ============================================================
    COLUNAS
 ============================================================ */
 
-
+.header__left {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 42%; /* Reserva espaço fixo na esquerda */
+}
 
 .header__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Força o alinhamento no centro exato da tela */
+    z-index: 10;
     display: flex;
-    justify-self: center;
+    justify-content: center;
     align-items: center;
 }
 
-.header__left{
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-}
-
-.header__right{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    gap:15px;
+.header__right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 46%; /* Reserva espaço maior e fixo para a direita (links + busca) */
+    gap: 20px;
 }
 
 /* ============================================================
@@ -129,22 +135,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; 
 }
 
 .logo a {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 .logo__img {
-    height: 110px; 
-    width: auto;
-    display: block;
+    height: 95px;
+    width: 95px;
+    border-radius: 50%;
     object-fit: contain;
-    vertical-align: middle; 
+    display: block;
     transition: transform .3s ease;
 }
 
@@ -207,11 +211,12 @@
 .header__search {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
 .header__search input {
-    width: 200px;
+    width: 150px;
     height: 38px;
     padding: 0 15px;
     border-radius: 30px;
@@ -219,10 +224,6 @@
     background: transparent;
     color: #fff;
     outline: none;
-}
-
-.header__search input::placeholder {
-    color: #999;
 }
 
 .header__search button {
