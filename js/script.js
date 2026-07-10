@@ -92,7 +92,7 @@
     ouvidoria: `
             <h2>Ouvidoria</h2>
             <p>Canal exclusivo para reclamações, sugestões e elogios. Sua opinião é fundamental para melhorarmos cada dia mais.</p>
-            <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> ouvidoria@josejustifc.com.br</p>
+            <p><i class="fas fa-envelope" style="color:#D4AF37; width:30px;"></i> <strong>E-mail:</strong> Indefinido</p>
             <p><i class="fas fa-phone-alt" style="color:#D4AF37; width:30px;"></i> <strong>Telefone:</strong> (19) 99014-1082 e (19) 99608-3109</p>
             <p><i class="fas fa-clock" style="color:#D4AF37; width:30px;"></i> <strong>Atendimento:</strong> Segunda a sexta, 10h às 17h</p>
         `,
