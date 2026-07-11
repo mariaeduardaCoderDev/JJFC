@@ -12,7 +12,7 @@
   );
 
   // Mapeando os elementos da busca pelas classes do CSS para fazer funcionar
-const searchInput = document.querySelector("#searchInput");
+  const searchInput = document.querySelector("#searchInput");
 const searchBtn = document.querySelector("#searchBtn");
 
   // ===== Mapeamento para breadcrumb =====
