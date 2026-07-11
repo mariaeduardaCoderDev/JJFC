@@ -11,10 +11,6 @@
     ".nav__item--has-dropdown > .nav__link",
   );
 
-  // Mapeando os elementos da busca pelas classes do CSS para fazer funcionar
-  const searchInput = document.querySelector("#searchInput");
-const searchBtn = document.querySelector("#searchBtn");
-
   // ===== Mapeamento para breadcrumb =====
   const sectionInfo = {
     home: { label: "HOME", parent: null },
@@ -36,7 +32,7 @@ const searchBtn = document.querySelector("#searchBtn");
     "proximos-jogos": { label: "PRÓXIMOS JOGOS", parent: "home" },
   };
 
-  // ===== CONTEÚDO DAS PÁGINAS (ALINHADO COM A HISTÓRIA REAL) =====
+  // ===== CONTEÚDO DAS PÁGINAS =====
   const contentMap = {
     home: `
             <div class="page-home">
@@ -318,56 +314,53 @@ const searchBtn = document.querySelector("#searchBtn");
       .forEach((item) => item.classList.remove("open"));
   }
 
-  // ===== INICIALIZAÇÃO =====
+  // ===== FUNÇÃO DE PESQUISA CORRIGIDA =====
   function pesquisar() {
-    if (!searchInput) return;
+    // Busca flexível: funciona tanto com id="searchInput" quanto com class="search__input"
+    const input = document.getElementById("searchInput") || document.querySelector(".search__input");
+    if (!input) return;
 
-    const texto = searchInput.value.toLowerCase().trim();
+    const texto = input.value.toLowerCase().trim();
 
+    // Mapeamento expandido (inclui singulares e variações comuns)
     const resultados = {
       historia: "historia",
       história: "historia",
-
       titulo: "titulos",
       títulos: "titulos",
       titulos: "titulos",
-
       identidade: "identidade",
-
       diretoria: "diretoria",
       presidente: "diretoria",
-
       contato: "contato",
       contatos: "contatos",
-
       ouvidoria: "ouvidoria",
-
       futebol: "futebol",
-
+      modalidade: "modalidades",
       modalidades: "modalidades",
-
+      ingresso: "ingressos",
       ingressos: "ingressos",
+      plano: "ingressos",
       planos: "ingressos",
-
       transparencia: "transparencia",
       transparência: "transparencia",
-
+      negocio: "negocios",
       negocios: "negocios",
       negócios: "negocios",
-
       imprensa: "imprensa",
-
+      noticia: "noticias",
       noticias: "noticias",
       notícias: "noticias",
-
+      jogo: "proximos-jogos",
       jogos: "proximos-jogos",
       próximos: "proximos-jogos",
+      proximos: "proximos-jogos"
     };
 
     for (let palavra in resultados) {
       if (texto.includes(palavra)) {
         loadContent(resultados[palavra]);
-        searchInput.value = "";
+        input.value = ""; // Limpa a barra de pesquisa após o sucesso
         return;
       }
     }
@@ -375,16 +368,23 @@ const searchBtn = document.querySelector("#searchBtn");
     alert("Nenhum resultado encontrado.");
   }
 
+  // ===== INICIALIZAÇÃO CORRIGIDA =====
   function init() {
     const hash = window.location.hash.replace("#", "");
     loadContent(hash || "home");
 
     navLinks.forEach((link) => link.addEventListener("click", navigate));
 
-    // Vincula os eventos apenas se os seletores da busca existirem no DOM
-    if (searchBtn && searchInput) {
-      searchBtn.addEventListener("click", pesquisar);
-      searchInput.addEventListener("keydown", function (e) {
+    // Captura os elementos de busca dinamicamente para evitar problemas de carregamento
+    const btnBusca = document.getElementById("searchBtn") || document.querySelector(".search__btn");
+    const inputBusca = document.getElementById("searchInput") || document.querySelector(".search__input");
+
+    if (btnBusca) {
+      btnBusca.addEventListener("click", pesquisar);
+    }
+
+    if (inputBusca) {
+      inputBusca.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
           pesquisar();
         }
