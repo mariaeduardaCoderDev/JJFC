@@ -104,13 +104,13 @@
             <h2>Próximos Jogos</h2>
             <table class="table-games">
                 <thead>
-                    <tr><th>Data</th><th>Adversário</th><th>Local</th><th>Horário</th></tr>
+                    <tr><th>Data</th><th>Adversário</th><th>Local</th><th>Horário</th><th>Competição</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>02/08/2026</td><td>Figueirense</td><td>Mocoquinha</td><td>08:00</td></tr>
-                    <tr><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td></tr>
-                    <tr><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td></tr>
-                    <tr><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td></tr>
+                    <tr><td>02/08/2026</td><td>Figueirense</td><td>Mocoquinha</td><td>08:00</td><td>Amistoso</td></tr>
+                    <tr><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td></tr>
+                    <tr><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td></tr>
+                    <tr><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td><td>Indefinido</td></tr>
                 </tbody>
             </table>
         `,
